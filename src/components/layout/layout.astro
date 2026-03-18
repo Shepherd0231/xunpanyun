@@ -1,0 +1,76 @@
+---
+import '../../styles/global.css';
+import Header from './header.astro';
+import FloatingContact from '../communication/floating-contact.astro';
+import Analytics from '../seo/analytics.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = '外贸 B2B 独立站',
+  description = '专业的外贸 B2B 解决方案提供商',
+  keywords = '外贸,B2B,工业制造,出口',
+  ogImage,
+  canonicalUrl,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://example.com';
+const fullCanonicalUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={fullCanonicalUrl} />
+    
+    <!-- Robots -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonicalUrl} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <title>{title}</title>
+    
+    <!-- Analytics -->
+    <Analytics />
+    
+    <!-- SEO Schema Placeholder -->
+    <slot name="head" />
+  </head>
+  
+  <body class="min-h-screen bg-white">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <FloatingContact />
+  </body>
+</html>

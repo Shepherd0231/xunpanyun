@@ -1,0 +1,61 @@
+---
+import Container from './container.astro';
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+  isCurrent?: boolean;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+---
+
+<nav aria-label="Breadcrumb" class:list={['py-4 bg-gray-50 border-b border-gray-100', className]}>
+  <Container>
+    <ol class="flex flex-wrap items-center gap-2 text-sm">
+      <li class="flex items-center">
+        <a href="/" class="text-gray-500 hover:text-primary transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Home</span>
+        </a>
+      </li>
+      {items.map((item, index) => (
+        <li class="flex items-center">
+          <svg class="w-4 h-4 mx-2 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+          {item.isCurrent || index === items.length - 1 ? (
+            <span class="text-gray-900 font-medium" aria-current="page">
+              {item.name}
+            </span>
+          ) : (
+            <a href={item.url} class="text-gray-500 hover:text-primary transition-colors">
+              {item.name}
+            </a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </Container>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

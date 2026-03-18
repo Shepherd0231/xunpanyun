@@ -1,0 +1,41 @@
+---
+import Container from '../ui/container.astro';
+import Section from '../ui/section.astro';
+---
+
+<Section class="bg-gradient-to-br from-primary/5 to-blue-50">
+  <Container>
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Need a Quotation?
+      </h2>
+      <p class="text-lg text-gray-600 mb-8">
+        Get in touch with our sales team for customized solutions and competitive pricing. We typically respond within 24 hours.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/25"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span>Request a Quote</span>
+        </a>
+        <a
+          href="mailto:sales@example.com"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition-colors"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>Email Us</span>
+        </a>
+      </div>
+      <p class="mt-6 text-sm text-gray-500">
+        Or call us directly: <a href="tel:+8612345678900" class="text-primary hover:underline font-medium">+86 123 4567 8900</a>
+      </p>
+    </div>
+  </Container>
+</Section>

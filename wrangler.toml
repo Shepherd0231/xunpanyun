@@ -1,0 +1,23 @@
+# Cloudflare Workers/Pages Configuration
+name = "yourbrand-b2b"
+compatibility_date = "2024-04-03"
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "yourbrand-db"
+database_id = "your-database-id-here"
+
+# Environment Variables (secrets should be set via wrangler secret)
+[vars]
+SANITY_PROJECT_ID = "39od49xj"
+SANITY_DATASET = "production"
+
+# Secrets (set via: wrangler secret put RESEND_API_KEY)
+# RESEND_API_KEY
+# SANITY_PROJECT_ID
+# SANITY_WRITE_TOKEN
+# KIMI_API_KEY
+# PUBLIC_GA_ID
+# PUBLIC_WHATSAPP_NUMBER
+# PUBLIC_CONTACT_EMAIL

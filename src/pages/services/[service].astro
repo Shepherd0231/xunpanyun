@@ -1,0 +1,197 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import InquiryCTA from '../../components/communication/inquiry-cta.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+import { slugify } from '../../utils/slugify';
+
+// Placeholder service data - replace with CMS integration
+const services = [
+  {
+    id: '1',
+    title: 'CNC Machining Services',
+    description: 'Precision CNC machining for complex parts and prototypes with tight tolerances.',
+    fullDescription: 'Our CNC machining services deliver precision-engineered components for industries requiring exacting standards. With multi-axis CNC machines and experienced programmers, we can produce complex geometries from various materials including aluminum, steel, titanium, and engineering plastics.',
+    image: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80',
+    features: [
+      '5-axis CNC machining capability',
+      'Tolerance up to ±0.001mm',
+      'Materials: Aluminum, Steel, Titanium, Plastics',
+      'Prototype to production volumes',
+      'Quality inspection with CMM',
+    ],
+    industries: ['Aerospace', 'Automotive', 'Medical', 'Electronics'],
+  },
+  {
+    id: '2',
+    title: 'Sheet Metal Fabrication',
+    description: 'Complete sheet metal solutions from design to finished product.',
+    fullDescription: 'We offer comprehensive sheet metal fabrication services including laser cutting, CNC punching, bending, welding, and surface finishing. Our modern facility handles projects from simple brackets to complex enclosures and assemblies.',
+    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80',
+    features: [
+      'Fiber laser cutting up to 25mm steel',
+      'CNC press brake bending',
+      'Robotic and manual welding',
+      'Powder coating and plating',
+      'Assembly and integration',
+    ],
+    industries: ['Construction', 'Energy', 'Telecommunications', 'Industrial Equipment'],
+  },
+  {
+    id: '3',
+    title: 'Product Design & Engineering',
+    description: 'End-to-end product development from concept to manufacturing.',
+    fullDescription: 'Our engineering team provides full product development support including conceptual design, detailed engineering, prototyping, and manufacturing optimization. We use advanced CAD/CAM software and simulation tools to ensure design for manufacturability.',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
+    features: [
+      '3D CAD modeling and design',
+      'DFM (Design for Manufacturing) analysis',
+      'Rapid prototyping services',
+      'Engineering documentation',
+      'Manufacturing process optimization',
+    ],
+    industries: ['Consumer Products', 'Industrial', 'Medical Devices', 'Automotive'],
+  },
+];
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { service: slugify(service.title) },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+
+const breadcrumbItems = [
+  { name: 'Services', url: '/services' },
+  { name: service.title, url: `/services/${slugify(service.title)}`, isCurrent: true },
+];
+
+const pageTitle = `${service.title} | YourBrand`;
+---
+
+<Layout title={pageTitle} description={service.description}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={service.description} ogType="website" />
+  <Schema
+    slot="head"
+    schema={[
+      {
+        type: 'Organization',
+        name: 'YourBrand',
+        description: service.description,
+      },
+      {
+        type: 'BreadcrumbList',
+        items: [
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' },
+          { name: service.title, url: `/services/${slugify(service.title)}` },
+        ],
+      },
+    ]}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Service Hero -->
+  <Section class="bg-gradient-to-br from-primary/5 to-blue-50">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">{service.title}</h1>
+          <p class="text-lg text-gray-600 mb-8 leading-relaxed">{service.fullDescription}</p>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+          >
+            <span>Discuss Your Project</span>
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        <div class="aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 shadow-xl">
+          <SmartImage
+            src={service.image}
+            alt={service.title}
+            class="w-full h-full object-cover"
+            aspectRatio="4/3"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Features Section -->
+  <Section>
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Key Capabilities</h2>
+          <ul class="space-y-4">
+            {service.features.map((feature) => (
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 flex items-center justify-center rounded-full bg-green-100 text-green-600 flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <span class="text-gray-700">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Industries Served</h2>
+          <div class="grid grid-cols-2 gap-4">
+            {service.industries.map((industry) => (
+              <div class="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
+                <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <span class="font-medium text-gray-900">{industry}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Process Section -->
+  <Section class="bg-gray-50">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Our Process</h2>
+        <p class="text-gray-600">From initial consultation to final delivery, we ensure quality at every step.</p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-8">
+        {[
+          { step: '01', title: 'Consultation', desc: 'Discuss your requirements and specifications' },
+          { step: '02', title: 'Quotation', desc: 'Receive detailed pricing and timeline' },
+          { step: '03', title: 'Production', desc: 'Manufacturing with quality control' },
+          { step: '04', title: 'Delivery', desc: 'On-time shipping with full documentation' },
+        ].map((item) => (
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-primary text-white text-xl font-bold">
+              {item.step}
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">{item.title}</h3>
+            <p class="text-sm text-gray-600">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Inquiry CTA -->
+  <InquiryCTA />
+</Layout>
