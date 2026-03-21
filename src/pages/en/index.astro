@@ -1,44 +1,44 @@
 ---
-import Layout from '../components/layout/layout.astro';
-import Container from '../components/ui/container.astro';
-import Section from '../components/ui/section.astro';
-import SmartImage from '../components/media/smart-image.astro';
-import InquiryCTA from '../components/communication/inquiry-cta.astro';
-import SEO from '../components/seo/seo.astro';
-import Schema from '../components/seo/schema.astro';
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import InquiryCTA from '../../components/communication/inquiry-cta.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
 
-const pageTitle = '外贸获客型网站系统 | 询盘云 InquiryCloud';
-const pageDescription = '询盘云让您的独立站成为自动获客系统。高转化+可规模增长+可长期运营，帮您持续拿询盘的外贸独立站解决方案。';
+const pageTitle = 'Foreign Trade Lead Generation System | InquiryCloud';
+const pageDescription = 'InquiryCloud transforms your independent website into an automated lead generation system. High conversion + scalable growth + long-term operation.';
 
 const capabilities = [
   {
-    title: '全渠道询盘获取',
-    description: '即时沟通、邮件、表单、社媒引流，不丢任何一个潜在客户',
+    title: 'Multi-Channel Lead Capture',
+    description: 'Instant chat, email, forms, and social media integration - never miss a potential customer',
     icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
   },
   {
-    title: '任意页面触发转化',
-    description: '所有页面都可引导咨询，浏览=转化路径，而非单纯展示',
+    title: 'Conversion on Every Page',
+    description: 'Every page can guide inquiries - browsing equals conversion path, not just display',
     icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
   },
   {
-    title: '高转化结构设计',
-    description: '产品页、服务页、博客页都带引导动作，网站=24小时销售人员',
+    title: 'High-Converting Structure',
+    description: 'Product, service, and blog pages all include call-to-action - your website becomes a 24/7 salesperson',
     icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
   },
   {
-    title: '内容驱动增长',
-    description: '可持续增加产品页、行业文章、案例，流量持续增长而非一次性',
+    title: 'Content-Driven Growth',
+    description: 'Sustainable expansion of products, articles, and cases - continuous traffic growth',
     icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
   },
   {
-    title: '多语言全球覆盖',
-    description: '一套系统覆盖多个国家市场，全球访问体验一致',
+    title: 'Global Multi-Language Coverage',
+    description: 'One system covers multiple country markets with consistent global experience',
     icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
   },
   {
-    title: '询盘记录与追踪',
-    description: '所有客户信息自动保存，客户资产沉淀，而非一次性流量',
+    title: 'Lead Tracking & Recording',
+    description: 'All customer information automatically saved - build customer assets, not just one-time traffic',
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
   },
 ];
@@ -46,67 +46,67 @@ const capabilities = [
 const features = [
   {
     step: '01',
-    title: '自动获客',
-    description: '全渠道询盘入口，任意页面触发转化，不丢任何一个潜在客户',
+    title: 'Automated Lead Gen',
+    description: 'Multi-channel inquiry entry points, conversion triggers on any page',
   },
   {
     step: '02',
-    title: '内容增长',
-    description: '可持续扩展的产品/文章/案例体系，流量持续增长',
+    title: 'Content Growth',
+    description: 'Scalable product/article/case system for continuous traffic growth',
   },
   {
     step: '03',
-    title: '全球销售',
-    description: '多语言覆盖，全球访问一致体验，一套系统覆盖多国市场',
+    title: 'Global Sales',
+    description: 'Multi-language coverage, consistent global experience',
   },
   {
     step: '04',
-    title: '长期运营',
-    description: '非技术人员可自主更新，几乎零维护成本，持续进化',
+    title: 'Long-term Operation',
+    description: 'Non-technical staff can update, near-zero maintenance cost',
   },
 ];
 
 const results = [
   {
     value: '3-5x',
-    label: '询盘量提升',
-    desc: '平均客户询盘增长',
+    label: 'Lead Increase',
+    desc: 'Average client growth',
   },
   {
     value: '200+',
-    label: '成功部署',
-    desc: '企业级获客系统',
+    label: 'Deployments',
+    desc: 'Enterprise systems',
   },
   {
     value: '98%',
-    label: '客户续约',
-    desc: '持续合作率',
+    label: 'Retention',
+    desc: 'Continued partnership',
   },
   {
     value: '24/7',
-    label: '自动获客',
-    desc: '全年无休运转',
+    label: 'Auto Lead Gen',
+    desc: 'Year-round operation',
   },
 ];
 
 const testimonials = [
   {
-    content: '询盘云让我们的独立站成为真正的获客引擎。上线3个月，询盘量翻了4倍，而且质量很高。',
-    author: '张总',
-    company: '某机械出口企业',
-    result: '询盘量 +320%',
+    content: 'InquiryCloud transformed our website into a real lead generation engine. In 3 months, inquiries increased 4x with high quality.',
+    author: 'Mr. Zhang',
+    company: 'Machinery Export Company',
+    result: 'Leads +320%',
   },
   {
-    content: '以前网站只是个展示，现在每个页面都能带来咨询。最惊喜的是SEO流量也在持续增长。',
-    author: '李经理',
-    company: '某家居品牌',
-    result: '自然流量 +180%',
+    content: 'Our website used to be just a showcase, now every page brings consultations. SEO traffic keeps growing too.',
+    author: 'Manager Li',
+    company: 'Home Furnishing Brand',
+    result: 'Organic +180%',
   },
   {
-    content: '多语言版本帮我们打开了欧洲市场，一套系统管理所有站点，效率提升太多了。',
-    author: '王总监',
-    company: '某电子企业',
-    result: '覆盖 5 国市场',
+    content: 'Multi-language versions helped us open European markets. One system manages all sites - efficiency improved dramatically.',
+    author: 'Director Wang',
+    company: 'Electronics Enterprise',
+    result: '5 Countries Covered',
   },
 ];
 ---
@@ -117,7 +117,7 @@ const testimonials = [
     slot="head"
     schema={{
       type: 'Organization',
-      name: '询盘云 InquiryCloud',
+      name: 'InquiryCloud',
       description: pageDescription,
       url: 'https://example.com',
       contactPoint: {
@@ -141,53 +141,53 @@ const testimonials = [
         <div class="max-w-xl">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 text-teal-700 rounded text-sm mb-6 border border-teal-100">
             <span class="w-1.5 h-1.5 bg-teal-600 rounded-full"></span>
-            外贸企业专用获客系统
+            Lead Generation System for Foreign Trade
           </div>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-stone-800 mb-6 leading-tight tracking-tight">
-            询盘云让您的独立站
-            <span class="font-normal text-teal-700">成为自动获客系统</span>
+            Transform Your Website Into an
+            <span class="font-normal text-teal-700">Automated Lead System</span>
           </h1>
           <p class="text-lg text-stone-500 mb-8 leading-relaxed">
-            高转化 + 可规模增长 + 可长期运营。帮您持续拿询盘的外贸独立站解决方案，让每一个访客都成为潜在客户。
+            High conversion + scalable growth + long-term operation. A complete solution for foreign trade businesses to continuously acquire leads.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
-              href="/contact"
+              href="/en/contact"
               class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-stone-800 text-white font-medium rounded hover:bg-stone-700 transition-colors"
             >
-              <span>免费获取方案</span>
+              <span>Get Free Proposal</span>
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </a>
             <a
-              href="/cases"
+              href="/en/cases"
               class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-stone-700 font-medium rounded hover:bg-stone-50 transition-colors border border-stone-200"
             >
-              <span>查看客户成果</span>
+              <span>View Client Results</span>
             </a>
           </div>
           
           <div class="mt-12 pt-8 border-t border-stone-200">
-            <p class="text-sm text-stone-400 mb-4">已帮助 200+ 外贸企业实现获客增长</p>
+            <p class="text-sm text-stone-400 mb-4">Helped 200+ foreign trade businesses achieve growth</p>
             <div class="flex flex-wrap items-center gap-6">
               <div class="flex items-center gap-2 text-stone-500">
                 <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                 </svg>
-                <span class="text-sm">全渠道获客</span>
+                <span class="text-sm">Multi-Channel Leads</span>
               </div>
               <div class="flex items-center gap-2 text-stone-500">
                 <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                 </svg>
-                <span class="text-sm">内容增长</span>
+                <span class="text-sm">Content Growth</span>
               </div>
               <div class="flex items-center gap-2 text-stone-500">
                 <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                 </svg>
-                <span class="text-sm">多语言覆盖</span>
+                <span class="text-sm">Multi-Language</span>
               </div>
             </div>
           </div>
@@ -199,7 +199,7 @@ const testimonials = [
             <div class="relative bg-white rounded-lg shadow-sm border border-stone-100 p-3">
               <SmartImage
                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-                alt="外贸获客系统"
+                alt="Lead Generation System"
                 class="w-full rounded"
                 aspectRatio="4/3"
                 loading="eager"
@@ -211,8 +211,8 @@ const testimonials = [
                   </svg>
                 </div>
                 <div>
-                  <p class="text-xs text-stone-400">平均询盘提升</p>
-                  <p class="text-lg font-medium text-stone-700">3-5倍</p>
+                  <p class="text-xs text-stone-400">Average Lead Increase</p>
+                  <p class="text-lg font-medium text-stone-700">3-5x</p>
                 </div>
               </div>
             </div>
@@ -228,10 +228,10 @@ const testimonials = [
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="inline-block text-xs tracking-widest text-stone-500 uppercase mb-3">Core Value</span>
         <h2 class="text-3xl md:text-4xl font-light text-stone-100 mb-4">
-          核心价值：帮您持续拿询盘
+          Continuous Lead Generation for Your Business
         </h2>
         <p class="text-stone-400">
-          询盘云让您的独立站成为"自动获客系统 + 内容增长系统 + 全球销售入口"
+          InquiryCloud transforms your website into "Automated Lead System + Content Growth System + Global Sales Portal"
         </p>
       </div>
     </Container>
@@ -242,9 +242,9 @@ const testimonials = [
     <Container>
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">System Capabilities</span>
-        <h2 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">系统能力矩阵</h2>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">System Capability Matrix</h2>
         <p class="text-stone-500">
-          9大核心能力，打造真正能带来业务增长的外贸获客系统
+          9 core capabilities to build a foreign trade lead generation system that drives real business growth
         </p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -268,9 +268,9 @@ const testimonials = [
     <Container>
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">How It Works</span>
-        <h2 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">四大核心机制</h2>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">Four Core Mechanisms</h2>
         <p class="text-stone-500">
-          从获客到增长，从本地到全球，构建完整的业务增长闭环
+          From lead generation to growth, from local to global - building a complete business growth loop
         </p>
       </div>
       <div class="grid md:grid-cols-4 gap-8">
@@ -308,7 +308,7 @@ const testimonials = [
     <Container>
       <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="inline-block text-xs tracking-widest text-stone-500 uppercase mb-3">Client Results</span>
-        <h2 class="text-3xl md:text-4xl font-light text-stone-100 mb-4">客户真实成果</h2>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-100 mb-4">Real Client Results</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6">
         {testimonials.map((item) => (
@@ -338,15 +338,15 @@ const testimonials = [
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Why Us</span>
-          <h2 class="text-3xl font-light text-stone-800 mb-6">为什么选择我们？</h2>
+          <h2 class="text-3xl font-light text-stone-800 mb-6">Why Choose Us?</h2>
           <div class="space-y-6">
             <div class="flex gap-4">
               <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
                 <span class="text-teal-600 font-medium text-sm">01</span>
               </div>
               <div>
-                <h3 class="font-medium text-stone-800 mb-1">懂外贸，更懂获客</h3>
-                <p class="text-stone-500 text-sm">询盘云基于外贸业务场景，帮您设计每一个转化环节</p>
+                <h3 class="font-medium text-stone-800 mb-1">Foreign Trade Expertise</h3>
+                <p class="text-stone-500 text-sm">Deep understanding of foreign trade business scenarios to optimize every conversion point</p>
               </div>
             </div>
             <div class="flex gap-4">
@@ -354,8 +354,8 @@ const testimonials = [
                 <span class="text-teal-600 font-medium text-sm">02</span>
               </div>
               <div>
-                <h3 class="font-medium text-stone-800 mb-1">系统思维，长期价值</h3>
-                <p class="text-stone-500 text-sm">从第一天就考虑可扩展性，网站可以随业务增长持续进化</p>
+                <h3 class="font-medium text-stone-800 mb-1">System Thinking, Long-term Value</h3>
+                <p class="text-stone-500 text-sm">Built for scalability from day one - your website evolves with your business growth</p>
               </div>
             </div>
             <div class="flex gap-4">
@@ -363,8 +363,8 @@ const testimonials = [
                 <span class="text-teal-600 font-medium text-sm">03</span>
               </div>
               <div>
-                <h3 class="font-medium text-stone-800 mb-1">数据驱动，持续优化</h3>
-                <p class="text-stone-500 text-sm">每个设计决策都有数据支撑，确保最大化转化效果</p>
+                <h3 class="font-medium text-stone-800 mb-1">Data-Driven Optimization</h3>
+                <p class="text-stone-500 text-sm">Every design decision backed by data to maximize conversion effectiveness</p>
               </div>
             </div>
             <div class="flex gap-4">
@@ -372,8 +372,8 @@ const testimonials = [
                 <span class="text-teal-600 font-medium text-sm">04</span>
               </div>
               <div>
-                <h3 class="font-medium text-stone-800 mb-1">交付即运营，零门槛上手</h3>
-                <p class="text-stone-500 text-sm">非技术人员也能轻松更新内容，真正实现自主运营</p>
+                <h3 class="font-medium text-stone-800 mb-1">Zero Learning Curve</h3>
+                <p class="text-stone-500 text-sm">Non-technical staff can easily update content - truly autonomous operation</p>
               </div>
             </div>
           </div>
@@ -382,7 +382,7 @@ const testimonials = [
           <div class="aspect-[4/3] rounded overflow-hidden">
             <SmartImage
               src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
-              alt="为什么选择我们"
+              alt="Why Choose Us"
               class="w-full h-full object-cover"
               aspectRatio="4/3"
             />

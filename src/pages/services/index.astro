@@ -1,0 +1,357 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+
+const pageTitle = '外贸获客系统服务 | 询盘云 InquiryCloud';
+const pageDescription = '询盘云让您的独立站成为自动获客系统。高转化+可规模增长+可长期运营，帮您持续拿询盘的外贸独立站解决方案。';
+
+const breadcrumbItems = [
+  { name: '服务', url: '/services', isCurrent: true },
+];
+
+const services = [
+  {
+    id: 'acquisition',
+    title: '获客型网站系统搭建',
+    subtitle: 'Acquisition System',
+    description: '从零开始构建完整的获客型网站系统，包含全渠道询盘获取、高转化结构设计、内容增长架构。',
+    features: [
+      '全渠道询盘入口（聊天/邮件/表单/社媒）',
+      '任意页面触发转化机制',
+      '高转化CTA布局与引导设计',
+      '询盘自动记录与通知系统',
+      'SEO优化架构，自然流量增长',
+      '响应式设计，移动端完美体验',
+    ],
+    price: '¥15,000 起',
+    timeline: '3-5周',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+    highlight: true,
+  },
+  {
+    id: 'ecommerce',
+    title: '电商获客系统',
+    subtitle: 'E-commerce + Acquisition',
+    description: '电商获客型网站定制开发，不仅是在线商城，更是自动获客引擎。优化购物流程，提升转化率。',
+    features: [
+      '电商获客型网站专业定制',
+      '产品页高转化设计',
+      '购物车挽回机制',
+      '会员系统与复购引导',
+      '多语言多货币支持',
+      '支付网关与物流集成',
+    ],
+    price: '¥25,000 起',
+    timeline: '4-6周',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+    icon: 'M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z',
+  },
+  {
+    id: 'multilingual',
+    title: '多语言全球获客系统',
+    subtitle: 'Global Acquisition',
+    description: '一套系统覆盖多个国家市场，多语言版本统一管理，全球访问体验一致，助力开拓国际市场。',
+    features: [
+      '多语言网站架构设计',
+      '语言切换与URL优化',
+      '本地化SEO配置',
+      'CDN全球加速部署',
+      '统一后台管理系统',
+      '各语言版本内容同步',
+    ],
+    price: '¥30,000 起',
+    timeline: '5-7周',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    id: 'upgrade',
+    title: '网站获客能力升级',
+    subtitle: 'Acquisition Upgrade',
+    description: '对现有网站进行全面获客能力改造，增加询盘入口、优化转化路径、提升SEO表现，让老站焕发新生。',
+    features: [
+      '现有网站获客能力诊断',
+      '询盘入口增加与优化',
+      '转化路径重新设计',
+      'SEO架构重构',
+      '页面加载速度优化',
+      '数据追踪与分析配置',
+    ],
+    price: '¥8,000 起',
+    timeline: '2-4周',
+    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80',
+    icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  },
+];
+
+const process = [
+  {
+    step: '01',
+    title: '获客诊断',
+    description: '深入分析您的业务场景、目标客户和现有获客渠道，找出增长机会点。',
+  },
+  {
+    step: '02',
+    title: '策略制定',
+    description: '基于诊断结果，制定获客系统架构方案，明确转化路径和内容策略。',
+  },
+  {
+    step: '03',
+    title: '系统设计',
+    description: '设计高转化的页面结构和交互流程，确保每个环节都服务于获客目标。',
+  },
+  {
+    step: '04',
+    title: '开发实现',
+    description: '前端开发实现，集成询盘系统、SEO优化、数据分析等全部功能。',
+  },
+  {
+    step: '05',
+    title: '测试优化',
+    description: '多设备测试、性能优化、转化路径验证，确保系统稳定高效运行。',
+  },
+  {
+    step: '06',
+    title: '交付运营',
+    description: '交付完整系统，提供运营培训，确保您能够自主管理和持续优化。',
+  },
+];
+
+const deliverables = [
+  {
+    title: '获客型网站系统',
+    desc: '完整的高转化网站，包含所有获客功能',
+  },
+  {
+    title: '询盘管理系统',
+    desc: '客户信息自动记录、分类、通知',
+  },
+  {
+    title: 'SEO优化配置',
+    desc: '技术SEO、内容SEO全面优化',
+  },
+  {
+    title: '数据分析看板',
+    desc: '流量、转化、询盘数据实时监控',
+  },
+  {
+    title: '运营培训文档',
+    desc: '详细的使用指南和最佳实践',
+  },
+  {
+    title: '3个月技术支持',
+    desc: '上线后的技术保障和优化建议',
+  },
+];
+
+const faqs = [
+  {
+    question: '什么是"获客型网站系统"？',
+    answer: '不同于传统展示型网站，获客型网站系统以"持续获取询盘"为核心目标。它包含全渠道询盘入口、高转化页面结构、内容增长架构、数据分析追踪等完整功能，让网站成为24小时自动获客的引擎。',
+  },
+  {
+    question: '系统上线后多久能看到效果？',
+    answer: '通常上线后1-2周即可开始收到询盘。SEO自然流量的增长需要3-6个月，但付费广告引流可以立即见效。我们会在交付时提供详细的运营指南，帮助您快速启动获客。',
+  },
+  {
+    question: '后续可以自己更新内容吗？',
+    answer: '当然可以。我们的系统设计初衷就是让非技术人员也能轻松运营。您可以通过后台自主添加产品、发布文章、修改页面内容，不需要依赖开发人员。',
+  },
+  {
+    question: '系统可以扩展到多语言吗？',
+    answer: '可以。我们的架构从一开始就考虑了多语言扩展。初期可以先用单语言上线，业务需要时再逐步增加语言版本，所有内容都可以统一管理。',
+  },
+  {
+    question: '与传统建站相比有什么优势？',
+    answer: '传统建站关注设计美观，我们关注获客效果；传统建站交付即结束，我们交付的是可长期运营的资产；传统建站难以扩展，我们的系统可以随业务增长持续进化。',
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'Service',
+      name: '询盘云 InquiryCloud 获客系统服务',
+      description: pageDescription,
+      provider: {
+        type: 'Organization',
+        name: '询盘云 InquiryCloud',
+      },
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Our Services</span>
+        <h1 class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+          询盘云让您的独立站
+          <span class="text-teal-700">成为自动获客系统</span>
+        </h1>
+        <p class="text-lg text-stone-500 leading-relaxed">
+          高转化 + 可规模增长 + 可长期运营。帮您持续拿询盘的外贸独立站解决方案
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Services Detail Section -->
+  <Section>
+    <Container>
+      <div class="space-y-24">
+        {services.map((service, index) => (
+          <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+            <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+              <div class="aspect-[4/3] rounded overflow-hidden">
+                <SmartImage
+                  src={service.image}
+                  alt={service.title}
+                  class="w-full h-full object-cover"
+                  aspectRatio="4/3"
+                />
+              </div>
+            </div>
+            <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded bg-teal-50 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d={service.icon} stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="text-xs tracking-widest text-stone-400 uppercase">{service.subtitle}</span>
+              </div>
+              <h2 class="text-2xl font-light text-stone-800 mb-4">{service.title}</h2>
+              <p class="text-stone-500 mb-6 leading-relaxed">{service.description}</p>
+              
+              <ul class="space-y-3 mb-8">
+                {service.features.map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-stone-600">
+                    <svg class="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="flex flex-wrap items-center gap-6 mb-6">
+                <div>
+                  <span class="text-xs text-stone-400 block mb-1">投资</span>
+                  <span class="text-lg font-medium text-stone-800">{service.price}</span>
+                </div>
+                <div>
+                  <span class="text-xs text-stone-400 block mb-1">周期</span>
+                  <span class="text-lg font-medium text-stone-800">{service.timeline}</span>
+                </div>
+              </div>
+
+              <a
+                href="/contact"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-stone-800 text-white text-sm font-medium rounded hover:bg-stone-700 transition-colors"
+              >
+                <span>获取详细方案</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Process Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Process</span>
+        <h2 class="text-3xl font-light text-stone-800 mb-4">服务流程</h2>
+        <p class="text-stone-500">
+          标准化的服务流程，确保每个获客系统都能高效高质量交付
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+        {process.map((item) => (
+          <div class="text-center">
+            <div class="text-4xl font-extralight text-teal-200 mb-3">{item.step}</div>
+            <h3 class="text-sm font-medium text-stone-800 mb-2">{item.title}</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Deliverables Section -->
+  <Section>
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Deliverables</span>
+        <h2 class="text-3xl font-light text-stone-800 mb-4">您将获得</h2>
+        <p class="text-stone-500">
+          不仅仅是网站，而是一套完整的获客系统交付
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {deliverables.map((item) => (
+          <div class="bg-stone-50 p-6 rounded border border-stone-100">
+            <h3 class="font-medium text-stone-800 mb-2">{item.title}</h3>
+            <p class="text-stone-500 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- FAQ Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">FAQ</span>
+        <h2 class="text-3xl font-light text-stone-800 mb-4">常见问题</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-4">
+        {faqs.map((faq) => (
+          <div class="bg-white rounded border border-stone-100 p-6">
+            <h3 class="text-sm font-medium text-stone-800 mb-2">{faq.question}</h3>
+            <p class="text-stone-500 text-sm leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- CTA Section -->
+  <Section class="bg-stone-900 text-stone-300">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto py-8">
+        <h2 class="text-3xl font-light text-stone-100 mb-4">准备好构建您的获客系统了吗？</h2>
+        <p class="text-stone-400 mb-8">
+          联系我们获取免费咨询和系统方案，开启您的自动获客之旅
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-stone-100 text-stone-800 font-medium rounded hover:bg-white transition-colors"
+        >
+          <span>免费获取方案</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </Container>
+  </Section>
+</Layout>

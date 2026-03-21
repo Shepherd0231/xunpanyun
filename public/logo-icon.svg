@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- 云朵 + 对话气泡组合图标 -->
+  <path d="M8 28C8 21.373 13.373 16 20 16C21.7 16 23.3 16.4 24.7 17.1C26.4 13.7 29.9 11.5 34 11.5C40.1 11.5 45 16.4 45 22.5C45 22.9 44.9 23.3 44.9 23.7C48.6 24.8 51.5 28.1 51.5 32.5C51.5 37.5 47.5 41.5 42.5 41.5H15C9.5 41.5 5 37 5 31.5C5 29.8 5.5 28.2 6.3 26.8" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M18 24H38C39.1 24 40 24.9 40 26V34C40 35.1 39.1 36 38 36H28L22 41V36H18C16.9 36 16 35.1 16 34V26C16 24.9 16.9 24 18 24Z" fill="#0d9488"/>
+  <circle cx="23" cy="30" r="1.5" fill="white"/>
+  <circle cx="28" cy="30" r="1.5" fill="white"/>
+  <circle cx="33" cy="30" r="1.5" fill="white"/>
+</svg>

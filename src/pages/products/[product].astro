@@ -9,47 +9,46 @@ import SEO from '../../components/seo/seo.astro';
 import Schema from '../../components/seo/schema.astro';
 import { slugify } from '../../utils/slugify';
 
-// Placeholder product data - replace with CMS integration
-const products = [
-  {
-    id: '1',
-    title: 'CNC Precision Machining Parts',
-    description: 'High-precision CNC machined components for industrial applications. Tolerance up to ±0.001mm.',
-    fullDescription: 'Our CNC precision machining parts are manufactured using state-of-the-art 5-axis CNC machines. We specialize in producing complex geometries with tight tolerances for aerospace, automotive, and medical industries. All parts undergo rigorous quality inspection before delivery.',
-    image: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80',
-    category: 'Machining',
-    material: 'Aluminum, Steel, Titanium',
-    moq: '100 pieces',
-    leadTime: '2-4 weeks',
-    certifications: ['ISO 9001', 'AS9100'],
-  },
-  {
-    id: '2',
-    title: 'Custom Metal Fabrication',
-    description: 'Professional metal fabrication services including cutting, bending, welding, and assembly.',
-    fullDescription: 'We provide comprehensive metal fabrication services from prototype to production. Our capabilities include laser cutting, CNC bending, robotic welding, and powder coating. We work with various materials including carbon steel, stainless steel, and aluminum.',
-    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80',
-    category: 'Fabrication',
-    material: 'Carbon Steel, Stainless Steel, Aluminum',
-    moq: '50 pieces',
-    leadTime: '3-5 weeks',
-    certifications: ['ISO 9001', 'AWS D1.1'],
-  },
-  {
-    id: '3',
-    title: 'Industrial Automation Components',
-    description: 'Custom automation parts and assemblies for manufacturing equipment.',
-    fullDescription: 'Our industrial automation components are designed for reliability and precision. We manufacture conveyor parts, robotic end-effectors, fixture components, and custom automation assemblies tailored to your production requirements.',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
-    category: 'Automation',
-    material: 'Steel, Aluminum, Engineering Plastics',
-    moq: '200 pieces',
-    leadTime: '4-6 weeks',
-    certifications: ['ISO 9001', 'CE'],
-  },
-];
-
 export function getStaticPaths() {
+  const products = [
+    {
+      id: '1',
+      title: 'CNC Precision Machining Parts',
+      description: 'High-precision CNC machined components for industrial applications. Tolerance up to ±0.001mm.',
+      fullDescription: 'Our CNC precision machining parts are manufactured using state-of-the-art 5-axis CNC machines. We specialize in producing complex geometries with tight tolerances for aerospace, automotive, and medical industries. All parts undergo rigorous quality inspection before delivery.',
+      image: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80',
+      category: 'Machining',
+      material: 'Aluminum, Steel, Titanium',
+      moq: '100 pieces',
+      leadTime: '2-4 weeks',
+      certifications: ['ISO 9001', 'AS9100'],
+    },
+    {
+      id: '2',
+      title: 'Custom Metal Fabrication',
+      description: 'Professional metal fabrication services including cutting, bending, welding, and assembly.',
+      fullDescription: 'We provide comprehensive metal fabrication services from prototype to production. Our capabilities include laser cutting, CNC bending, robotic welding, and powder coating. We work with various materials including carbon steel, stainless steel, and aluminum.',
+      image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80',
+      category: 'Fabrication',
+      material: 'Carbon Steel, Stainless Steel, Aluminum',
+      moq: '50 pieces',
+      leadTime: '3-5 weeks',
+      certifications: ['ISO 9001', 'AWS D1.1'],
+    },
+    {
+      id: '3',
+      title: 'Industrial Automation Components',
+      description: 'Custom automation parts and assemblies for manufacturing equipment.',
+      fullDescription: 'Our industrial automation components are designed for reliability and precision. We manufacture conveyor parts, robotic end-effectors, fixture components, and custom automation assemblies tailored to your production requirements.',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
+      category: 'Automation',
+      material: 'Steel, Aluminum, Engineering Plastics',
+      moq: '200 pieces',
+      leadTime: '4-6 weeks',
+      certifications: ['ISO 9001', 'CE'],
+    },
+  ];
+  
   return products.map((product) => ({
     params: { product: slugify(product.title) },
     props: { product },
@@ -63,7 +62,7 @@ const breadcrumbItems = [
   { name: product.title, url: `/products/${slugify(product.title)}`, isCurrent: true },
 ];
 
-const pageTitle = `${product.title} | YourBrand`;
+const pageTitle = `${product.title} | 询盘云 InquiryCloud`;
 ---
 
 <Layout title={pageTitle} description={product.description}>
@@ -76,7 +75,7 @@ const pageTitle = `${product.title} | YourBrand`;
         name: product.title,
         description: product.description,
         image: product.image,
-        brand: 'YourBrand',
+        brand: '询盘云 InquiryCloud',
         offers: {
           availability: 'https://schema.org/InStock',
         },

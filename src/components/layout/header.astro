@@ -1,11 +1,25 @@
 ---
 import Container from '../ui/container.astro';
 
-const navLinks = [
-  { href: '/products', label: 'Products' },
-  { href: '/services', label: 'Services' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/about', label: 'About Us' },
+// Get current locale from Astro
+const currentLocale = Astro.currentLocale || 'zh';
+const isEnglish = currentLocale === 'en';
+
+// Navigation links based on locale - manual URL construction to avoid trailing slash issues
+const navLinks = isEnglish ? [
+  { href: '/en/', label: 'Home' },
+  { href: '/en/about/', label: 'About' },
+  { href: '/en/services/', label: 'Services' },
+  { href: '/en/cases/', label: 'Cases' },
+  { href: '/en/blog/', label: 'Blog' },
+  { href: '/en/contact/', label: 'Contact' },
+] : [
+  { href: '/', label: '首页' },
+  { href: '/about/', label: '关于我们' },
+  { href: '/services/', label: '服务' },
+  { href: '/cases/', label: '案例' },
+  { href: '/blog/', label: '博客' },
+  { href: '/contact/', label: '联系我们' },
 ];
 
 const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '+8612345678900';
@@ -13,39 +27,40 @@ const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}`;
 
 // Language configuration
 const languages = [
-  { code: 'en', label: 'EN', name: 'English' },
   { code: 'zh', label: '中文', name: 'Chinese' },
-  { code: 'de', label: 'DE', name: 'German' },
+  { code: 'en', label: 'EN', name: 'English' },
 ];
-
-// Get current locale from URL
-const currentPath = Astro.url.pathname;
-const currentLocale = currentPath.startsWith('/zh') ? 'zh' : currentPath.startsWith('/de') ? 'de' : 'en';
 
 // Build language switch URLs
 function getLocaleUrl(locale: string): string {
-  if (locale === 'en') {
-    // Remove locale prefix for default language
-    return currentPath.replace(/^\/(zh|de)\//, '/');
+  const currentPath = Astro.url.pathname;
+  
+  // If current path starts with /en/, remove it for Chinese version
+  // If current path doesn't start with /en/, add it for English version
+  if (locale === 'zh') {
+    // Switch to Chinese: remove /en/ prefix
+    return currentPath.replace(/^\/en\//, '/') || '/';
+  } else {
+    // Switch to English: add /en/ prefix
+    if (currentPath.startsWith('/en/')) {
+      return currentPath;
+    }
+    return '/en' + currentPath;
   }
-  if (currentLocale === 'en') {
-    // Add locale prefix
-    return `/${locale}${currentPath}`;
-  }
-  // Replace locale prefix
-  return currentPath.replace(/^\/(zh|de)\//, `/${locale}/`);
 }
+
+const ctaText = isEnglish ? 'Free Consultation' : '免费咨询';
+const logoAlt = isEnglish ? 'InquiryCloud' : '询盘云';
+const homeLink = isEnglish ? '/en/' : '/';
+const contactLink = isEnglish ? '/en/contact/' : '/contact/';
 ---
 
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-100">
   <Container>
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 text-xl font-bold text-gray-900">
-        <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-        <span>YourBrand</span>
+      <a href={homeLink} class="flex items-center gap-3">
+        <img src="/logo.svg" alt={logoAlt} class="h-9 w-auto" />
       </a>
 
       <!-- Desktop Navigation -->
@@ -53,7 +68,7 @@ function getLocaleUrl(locale: string): string {
         {navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-gray-600 hover:text-primary transition-colors font-medium"
+            class="text-sm text-stone-500 hover:text-stone-800 transition-colors"
           >
             {link.label}
           </a>
@@ -61,25 +76,25 @@ function getLocaleUrl(locale: string): string {
       </nav>
 
       <!-- Right Actions -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3">
         <!-- Language Switcher -->
         <div class="relative group">
           <button
             type="button"
-            class="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+            class="flex items-center gap-1 px-2 py-1 text-sm text-stone-500 hover:text-stone-800 transition-colors"
             aria-label="Select language"
           >
-            <span>{languages.find(l => l.code === currentLocale)?.label || 'EN'}</span>
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <span>{languages.find(l => l.code === currentLocale)?.label || '中文'}</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="6 9 12 15 18 9"/>
             </svg>
           </button>
-          <div class="absolute right-0 top-full mt-1 py-1 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all min-w-[120px]">
+          <div class="absolute right-0 top-full mt-1 py-1 bg-white rounded border border-stone-100 shadow-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all min-w-[100px]">
             {languages.map((lang) => (
               <a
                 href={getLocaleUrl(lang.code)}
-                class={`block px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                  currentLocale === lang.code ? 'text-primary font-medium' : 'text-gray-700'
+                class={`block px-3 py-1.5 text-sm hover:bg-stone-50 transition-colors ${
+                  currentLocale === lang.code ? 'text-stone-800 font-medium' : 'text-stone-500'
                 }`}
               >
                 {lang.name}
@@ -93,7 +108,7 @@ function getLocaleUrl(locale: string): string {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          class="hidden sm:flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors"
+          class="hidden sm:flex items-center justify-center w-8 h-8 rounded text-stone-400 hover:text-teal-600 transition-colors"
           aria-label="Contact us on WhatsApp"
         >
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -103,48 +118,48 @@ function getLocaleUrl(locale: string): string {
 
         <!-- Contact Button -->
         <a
-          href="/contact"
-          class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          href={contactLink}
+          class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-stone-800 text-white text-sm font-medium rounded hover:bg-stone-700 transition-colors"
         >
-          <span>Contact Us</span>
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <span>{ctaText}</span>
         </a>
 
         <!-- Mobile Menu Button -->
         <button
           type="button"
-          class="md:hidden p-2 text-gray-600 hover:text-gray-900"
-          aria-label="Open menu"
-          data-mobile-menu-toggle
+          id="mobile-menu-btn"
+          class="md:hidden flex items-center justify-center w-10 h-10 rounded text-stone-500 hover:text-stone-800 transition-colors"
+          aria-label="Toggle menu"
         >
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
+          <svg class="w-6 h-6 menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <svg class="w-6 h-6 close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
       </div>
     </div>
 
     <!-- Mobile Navigation -->
-    <nav class="hidden md:hidden py-4 border-t border-gray-100" data-mobile-menu>
+    <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-stone-100">
       <div class="flex flex-col gap-4">
         {navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-gray-600 hover:text-primary transition-colors font-medium py-2"
+            class="text-sm text-stone-500 hover:text-stone-800 transition-colors py-2"
           >
             {link.label}
           </a>
         ))}
         <a
-          href="/contact"
-          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-blue-700 transition-colors mt-2"
+          href={contactLink}
+          class="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-stone-800 text-white text-sm font-medium rounded hover:bg-stone-700 transition-colors mt-2"
         >
-          <span>Contact Us</span>
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <span>{ctaText}</span>
         </a>
       </div>
     </nav>
@@ -152,12 +167,24 @@ function getLocaleUrl(locale: string): string {
 </header>
 
 <script>
-  const toggleBtn = document.querySelector('[data-mobile-menu-toggle]');
-  const mobileMenu = document.querySelector('[data-mobile-menu]');
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = menuBtn?.querySelector('.menu-icon');
+  const closeIcon = menuBtn?.querySelector('.close-icon');
 
-  if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking on a link
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
     });
-  }
+  });
 </script>

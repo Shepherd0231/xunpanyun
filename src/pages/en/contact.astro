@@ -1,0 +1,257 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+
+const pageTitle = 'Contact Us | InquiryCloud - Free Consultation';
+const pageDescription = 'Contact InquiryCloud for a free consultation. We provide professional lead generation solutions for foreign trade enterprises.';
+
+const breadcrumbItems = [
+  { name: 'Contact Us', url: '/en/contact', isCurrent: true },
+];
+
+const contactInfo = {
+  phone: '+86 400-888-8888',
+  email: 'hello@xunpanyun.com',
+  workingHours: 'Mon-Fri: 9:00 - 18:00 (GMT+8)',
+};
+
+const faqs = [
+  {
+    question: 'How long does it take to build a lead generation system?',
+    answer: 'Typically 3-5 weeks, depending on project complexity. We provide detailed timeline planning during consultation.',
+  },
+  {
+    question: 'Do you provide website maintenance services?',
+    answer: 'Yes, we provide ongoing technical support and maintenance services to ensure your system runs smoothly.',
+  },
+  {
+    question: 'Can I update website content myself?',
+    answer: 'Absolutely. Our system is designed for easy content management without technical knowledge.',
+  },
+  {
+    question: 'What technologies do you use?',
+    answer: 'We use modern technology architecture ensuring excellent performance, SEO-friendliness, and fast global access.',
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'ContactPage',
+      name: 'Contact InquiryCloud',
+      description: pageDescription,
+      url: 'https://example.com/en/contact',
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Contact Us</span>
+        <h1 class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+          Get Your <span class="text-teal-700">Free Consultation</span>
+        </h1>
+        <p class="text-lg text-stone-500 leading-relaxed">
+          Tell us about your business needs and we'll provide a customized lead generation solution
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Contact Section -->
+  <Section>
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-16">
+        <!-- Contact Form -->
+        <div>
+          <h2 class="text-2xl font-light text-stone-800 mb-6">Send Us a Message</h2>
+          <form id="contactForm" class="space-y-6" action="/api/submit/" method="POST">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm text-stone-600 mb-2">Name <span class="text-teal-600">*</span></label>
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  class="w-full px-4 py-3 rounded border border-stone-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-colors"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm text-stone-600 mb-2">Company <span class="text-teal-600">*</span></label>
+                <input
+                  type="text"
+                  name="company"
+                  required
+                  class="w-full px-4 py-3 rounded border border-stone-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-colors"
+                  placeholder="Your company"
+                />
+              </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm text-stone-600 mb-2">Email <span class="text-teal-600">*</span></label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 rounded border border-stone-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label class="block text-sm text-stone-600 mb-2">Phone <span class="text-teal-600">*</span></label>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  class="w-full px-4 py-3 rounded border border-stone-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-colors"
+                  placeholder="Your phone number"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm text-stone-600 mb-2">Industry <span class="text-teal-600">*</span></label>
+              <select
+                name="industry"
+                required
+                class="w-full px-4 py-3 rounded border border-stone-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-colors bg-white"
+              >
+                <option value="">Select your industry</option>
+                <option value="manufacturing">Manufacturing</option>
+                <option value="electronics">Electronics</option>
+                <option value="machinery">Machinery</option>
+                <option value="textile">Textile & Clothing</option>
+                <option value="chemical">Chemical</option>
+                <option value="building">Building Materials</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-stone-600 mb-2">Message</label>
+              <textarea
+                name="message"
+                rows="5"
+                class="w-full px-4 py-3 rounded border border-stone-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-colors resize-none"
+                placeholder="Tell us about your project..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-stone-800 text-white font-medium rounded hover:bg-stone-700 transition-colors"
+            >
+              Send Message
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-2xl font-light text-stone-800 mb-6">Contact Information</h2>
+          <div class="space-y-6 mb-12">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">Phone</h3>
+                <p class="text-stone-500">{contactInfo.phone}</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">Email</h3>
+                <p class="text-stone-500">{contactInfo.email}</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">Working Hours</h3>
+                <p class="text-stone-500">{contactInfo.workingHours}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <h3 class="text-lg font-medium text-stone-800 mb-4">Frequently Asked Questions</h3>
+          <div class="space-y-4">
+            {faqs.map((faq) => (
+              <div class="border border-stone-100 rounded p-4">
+                <h4 class="font-medium text-stone-800 mb-2 text-sm">{faq.question}</h4>
+                <p class="text-stone-500 text-sm">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>
+
+<script>
+  // Contact form submission handler
+  const form = document.getElementById('contactForm');
+  const submitBtn = form?.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn?.innerHTML;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!submitBtn) return;
+    
+    // Disable button and show loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Submitting...</span>';
+    
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('/api/submit/', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        // Show success message
+        alert(result.message || 'Submitted successfully! We will contact you within 24 hours.');
+        form.reset();
+      } else {
+        // Show error message
+        alert(result.error || 'Submission failed, please try again later.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Submission failed, please try again later or contact us by phone.');
+    } finally {
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText || '<span>Send Message</span>';
+    }
+  });
+</script>

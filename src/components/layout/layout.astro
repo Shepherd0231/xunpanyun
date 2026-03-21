@@ -1,6 +1,7 @@
 ---
 import '../../styles/global.css';
 import Header from './header.astro';
+import Footer from './footer.astro';
 import FloatingContact from '../communication/floating-contact.astro';
 import Analytics from '../seo/analytics.astro';
 
@@ -24,10 +25,14 @@ const {
 
 const siteUrl = Astro.site?.toString() || 'https://example.com';
 const fullCanonicalUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
+
+// 使用 Astro 内置 i18n 检测当前语言
+const currentLocale = Astro.currentLocale || 'zh';
+const lang = currentLocale === 'en' ? 'en' : 'zh-CN';
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,11 +71,12 @@ const fullCanonicalUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
     <slot name="head" />
   </head>
   
-  <body class="min-h-screen bg-white">
+  <body class="min-h-screen bg-white flex flex-col">
     <Header />
-    <main>
+    <main class="flex-1">
       <slot />
     </main>
+    <Footer />
     <FloatingContact />
   </body>
 </html>

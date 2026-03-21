@@ -19,20 +19,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const formData = await request.formData();
     
     const firstName = formData.get('firstName')?.toString() || '';
-    const company = formData.get('company')?.toString() || '';
+    const lastName = formData.get('lastName')?.toString() || '';
     const email = formData.get('email')?.toString() || '';
+    const company = formData.get('company')?.toString() || '';
     const phone = formData.get('phone')?.toString() || '';
-    const industry = formData.get('industry')?.toString() || '';
-    const targetMarket = formData.get('targetMarket')?.toString() || '';
-    const currentWebsite = formData.get('currentWebsite')?.toString() || '';
+    const subject = formData.get('subject')?.toString() || '';
     const message = formData.get('message')?.toString() || '';
 
     // Step 2: Validate required fields
-    if (!firstName || !company || !email || !phone || !industry) {
+    if (!firstName || !lastName || !email || !subject || !message) {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: '请填写所有必填字段' 
+          error: 'Missing required fields' 
         }), 
         { 
           status: 400, 
@@ -47,7 +46,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: '邮箱格式不正确' 
+          error: 'Invalid email format' 
         }), 
         { 
           status: 400, 
@@ -61,34 +60,46 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const db = locals.runtime?.env?.DB;
     
     if (db) {
+      // Create table if not exists (should be done in migration, but included for reference)
+      // await db.exec(`
+      //   CREATE TABLE IF NOT EXISTS inquiries (
+      //     id INTEGER PRIMARY KEY AUTOINCREMENT,
+      //     first_name TEXT NOT NULL,
+      //     last_name TEXT NOT NULL,
+      //     email TEXT NOT NULL,
+      //     company TEXT,
+      //     phone TEXT,
+      //     subject TEXT NOT NULL,
+      //     message TEXT NOT NULL,
+      //     status TEXT DEFAULT 'new',
+      //     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      //   )
+      // `);
+
       // Insert inquiry record
       await db.prepare(`
-        INSERT INTO inquiries 
-        (first_name, company, email, phone, industry, target_market, current_website, message, status, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'new', datetime('now'))
-      `).bind(firstName, company, email, phone, industry, targetMarket, currentWebsite, message).run();
+        INSERT INTO inquiries (first_name, last_name, email, company, phone, subject, message)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+      `).bind(firstName, lastName, email, company, phone, subject, message).run();
     }
 
     // Step 4: Send email notification via Resend
     const resendApiKey = locals.runtime?.env?.RESEND_API_KEY;
-    const contactEmail = locals.runtime?.env?.PUBLIC_CONTACT_EMAIL || 'hello@xunpanyun.com';
     
     if (resendApiKey) {
       const emailPayload = {
-        from: '询盘云 <no-reply@376543.xyz>',
-        to: ['shepherd.shen@gmail.com'],
-        subject: `新询盘: ${company} - ${industry}`,
+        from: 'YourBrand <noreply@yourbrand.com>',
+        to: ['sales@yourbrand.com'],
+        subject: `New Inquiry: ${subject}`,
         html: `
-          <h2>新询盘提交</h2>
-          <p><strong>联系人:</strong> ${firstName}</p>
-          <p><strong>公司:</strong> ${company}</p>
-          <p><strong>邮箱:</strong> ${email}</p>
-          <p><strong>电话:</strong> ${phone}</p>
-          <p><strong>行业:</strong> ${industry}</p>
-          <p><strong>目标市场:</strong> ${targetMarket || '未填写'}</p>
-          <p><strong>现有网站:</strong> ${currentWebsite || '未填写'}</p>
-          <p><strong>需求描述:</strong></p>
-          <p>${message ? message.replace(/\n/g, '<br>') : '未填写'}</p>
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Company:</strong> ${company || 'N/A'}</p>
+          <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br>')}</p>
         `,
         reply_to: email,
       };
@@ -113,7 +124,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: '提交成功！我们将在24小时内与您联系。' 
+        message: 'Thank you for your inquiry. We will contact you within 24 hours.' 
       }), 
       { 
         status: 200, 
@@ -127,7 +138,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: '提交失败，请稍后重试或通过电话联系我们。' 
+        error: 'An error occurred while processing your request. Please try again later.' 
       }), 
       { 
         status: 500, 
