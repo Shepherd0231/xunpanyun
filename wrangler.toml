@@ -1,6 +1,7 @@
 # Cloudflare Workers/Pages Configuration
 name = "xunpanyun"
 compatibility_date = "2024-04-03"
+pages_build_output_dir = "dist"
 
 # D1 Database Binding
 [[d1_databases]]
