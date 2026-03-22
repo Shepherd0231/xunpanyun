@@ -9,14 +9,13 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
   trailingSlash: 'always',
-  site: 'https://officialwebsite-9ec.pages.dev',
+  site: 'https://xunpanyun.pages.dev',
 
   i18n: {
     defaultLocale: 'zh',
     locales: ['zh', 'en'],
     routing: {
-      prefixDefaultLocale: false,
-      redirectToDefaultLocale: false,
+      prefixDefaultLocale: true,
     },
   },
 
