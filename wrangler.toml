@@ -1,0 +1,22 @@
+# Cloudflare Workers/Pages Configuration
+name = "xunpanyun"
+compatibility_date = "2024-04-03"
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "xunpanyun-db"
+database_id = "36ba178c-2a93-4db3-b125-c18e970d3474"
+
+# Environment Variables (non-sensitive)
+[vars]
+SANITY_PROJECT_ID = "39od49xj"
+SANITY_DATASET = "production"
+PUBLIC_CONTACT_EMAIL = "shepherd.shen@gmail.com"
+
+# Secrets (set via: wrangler secret put <NAME>)
+# RESEND_API_KEY - Resend API key for sending emails
+# SANITY_WRITE_TOKEN - Sanity CMS write token
+# KIMI_API_KEY - Kimi API key for content generation
+# PUBLIC_GA_ID - Google Analytics ID
+# PUBLIC_WHATSAPP_NUMBER - WhatsApp contact number

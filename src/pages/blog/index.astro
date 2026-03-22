@@ -1,0 +1,285 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+
+const pageTitle = '博客 | 询盘云 InquiryCloud';
+const pageDescription = '阅读询盘云的最新文章，了解独立站设计、SEO优化、电商运营等专业知识。';
+
+const breadcrumbItems = [
+  { name: '博客', url: '/blog', isCurrent: true },
+];
+
+const categories = [
+  { id: 'all', name: '全部' },
+  { id: 'design', name: '设计' },
+  { id: 'seo', name: 'SEO' },
+  { id: 'ecommerce', name: '电商' },
+  { id: 'marketing', name: '营销' },
+];
+
+const posts = [
+  {
+    id: 1,
+    title: '2024年外贸独立站设计趋势：简约与功能的完美平衡',
+    excerpt: '探索今年最流行的外贸网站设计趋势，从极简主义到微交互，了解如何让您...',
+    category: 'design',
+    categoryName: '设计',
+    date: '2024-03-15',
+    readTime: '5分钟',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80',
+    slug: 'web-design-trends-2024',
+  },
+  {
+    id: 2,
+    title: '外贸B2B电商网站设计：从产品展示到询盘转化',
+    excerpt: '深入解析外贸B2B电商网站的设计要点，从产品展示到询盘转化，打造高效的获客型网站...',
+    category: 'ecommerce',
+    categoryName: '电商',
+    date: '2024-03-10',
+    readTime: '8分钟',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80',
+    slug: 'b2b-ecommerce-design-guide',
+  },
+  {
+    id: 3,
+    title: '外贸网站SEO优化完全指南：从基础到进阶',
+    excerpt: '系统讲解外贸网站SEO优化的核心策略，包括关键词研究、技术SEO、内容优化...',
+    category: 'seo',
+    categoryName: 'SEO',
+    date: '2024-03-05',
+    readTime: '12分钟',
+    image: 'https://images.unsplash.com/photo-1572177812156-58036aae439c?w=600&q=80',
+    slug: 'seo-optimization-guide',
+  },
+  {
+    id: 4,
+    title: '高转化率落地页的10个设计原则',
+    excerpt: '基于数据的设计原则，帮助您打造转化率翻倍的营销落地页...',
+    category: 'marketing',
+    categoryName: '营销',
+    date: '2024-02-28',
+    readTime: '6分钟',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
+    slug: 'landing-page-design-principles',
+  },
+  {
+    id: 5,
+    title: '网站性能优化：如何让你的网站加载速度提升50%',
+    excerpt: '深入讲解网站性能优化的各种技巧，从图片压缩到代码优化，全面提升用户体验...',
+    category: 'design',
+    categoryName: '设计',
+    date: '2024-02-20',
+    readTime: '7分钟',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
+    slug: 'website-performance-optimization',
+  },
+  {
+    id: 6,
+    title: 'Google Ads投放指南：独立站引流实战技巧',
+    excerpt: '从账户设置到广告优化，全面讲解如何通过Google Ads为独立站带来精准流量...',
+    category: 'marketing',
+    categoryName: '营销',
+    date: '2024-02-15',
+    readTime: '10分钟',
+    image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80',
+    slug: 'google-ads-guide',
+  },
+];
+
+const featuredPost = posts[0];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'Blog',
+      name: '询盘云 InquiryCloud 博客',
+      description: pageDescription,
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Blog</span>
+        <h1 class="text-4xl md:text-5xl font-light text-stone-800 mb-6">博客文章</h1>
+        <p class="text-lg text-stone-500 leading-relaxed">
+          分享独立站设计、SEO优化、电商运营的实战经验和行业洞察
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Featured Post Section -->
+  <Section>
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-8 items-center bg-white rounded border border-stone-100 overflow-hidden">
+        <div class="aspect-[16/10] lg:aspect-auto lg:h-full">
+          <SmartImage
+            src={featuredPost.image}
+            alt={featuredPost.title}
+            class="w-full h-full object-cover"
+            aspectRatio="16/10"
+          />
+        </div>
+        <div class="p-8 lg:p-12">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-2 py-1 bg-teal-50 text-teal-600 text-xs rounded">{featuredPost.categoryName}</span>
+            <span class="text-stone-400 text-xs">{featuredPost.date}</span>
+          </div>
+          <h2 class="text-2xl font-light text-stone-800 mb-4">{featuredPost.title}</h2>
+          <p class="text-stone-500 mb-6 leading-relaxed">{featuredPost.excerpt}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-stone-400 text-sm">阅读时间：{featuredPost.readTime}</span>
+            <a
+              href={`/blog/${featuredPost.slug}`}
+              class="inline-flex items-center gap-2 text-stone-800 font-medium hover:text-teal-600 transition-colors"
+            >
+              <span>阅读全文</span>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Posts Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12">
+        {categories.map((category) => (
+          <button
+            class="px-4 py-2 text-sm rounded border border-stone-200 text-stone-600 hover:border-stone-400 hover:text-stone-800 transition-colors"
+            data-category={category.id}
+          >
+            {category.name}
+          </button>
+        ))}
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.slice(1).map((post) => (
+          <article class="group bg-white rounded border border-stone-100 overflow-hidden hover:border-stone-200 transition-all" data-post-category={post.category}>
+            <div class="aspect-[16/10] overflow-hidden">
+              <SmartImage
+                src={post.image}
+                alt={post.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                aspectRatio="16/10"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs text-teal-600">{post.categoryName}</span>
+                <span class="text-stone-300">·</span>
+                <span class="text-stone-400 text-xs">{post.date}</span>
+              </div>
+              <h3 class="text-lg font-medium text-stone-800 mb-2 line-clamp-2 group-hover:text-teal-600 transition-colors">
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h3>
+              <p class="text-stone-500 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-stone-400 text-xs">{post.readTime}阅读</span>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="text-sm text-stone-600 hover:text-teal-600 transition-colors"
+                >
+                  阅读更多 →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-12">
+        <button
+          class="inline-flex items-center gap-2 px-6 py-3 border border-stone-300 text-stone-600 font-medium rounded hover:border-stone-400 hover:text-stone-800 transition-colors"
+        >
+          <span>加载更多文章</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Newsletter Section -->
+  <Section>
+    <Container>
+      <div class="max-w-2xl mx-auto text-center py-8">
+        <h2 class="text-2xl font-light text-stone-800 mb-4">订阅我们的博客</h2>
+        <p class="text-stone-500 mb-8">
+          获取最新的独立站设计技巧、SEO策略和电商运营干货
+        </p>
+        <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="输入您的邮箱地址"
+            class="flex-1 px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-stone-400 focus:border-stone-400 transition-colors text-sm"
+            required
+          />
+          <button
+            type="submit"
+            class="px-6 py-3 bg-stone-800 text-white font-medium rounded hover:bg-stone-700 transition-colors text-sm"
+          >
+            立即订阅
+          </button>
+        </form>
+        <p class="text-stone-400 text-xs mt-4">我们尊重您的隐私，不会发送垃圾邮件</p>
+      </div>
+    </Container>
+  </Section>
+</Layout>
+
+<script>
+  // Simple category filter
+  const filterButtons = document.querySelectorAll('[data-category]');
+  const postItems = document.querySelectorAll('[data-post-category]');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category');
+      
+      // Update active state
+      filterButtons.forEach((btn) => {
+        btn.classList.remove('bg-stone-800', 'text-white', 'border-stone-800');
+        btn.classList.add('border-stone-200', 'text-stone-600');
+      });
+      button.classList.remove('border-stone-200', 'text-stone-600');
+      button.classList.add('bg-stone-800', 'text-white', 'border-stone-800');
+
+      // Filter posts
+      postItems.forEach((item) => {
+        if (category === 'all' || item.getAttribute('data-post-category') === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Set first button as active by default
+  if (filterButtons.length > 0) {
+    filterButtons[0].classList.remove('border-stone-200', 'text-stone-600');
+    filterButtons[0].classList.add('bg-stone-800', 'text-white', 'border-stone-800');
+  }
+</script>

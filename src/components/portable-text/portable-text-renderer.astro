@@ -1,0 +1,185 @@
+---
+import type { PortableTextBlock } from '@portabletext/types';
+import SmartImage from '../media/smart-image.astro';
+
+export interface Props {
+  value: PortableTextBlock[];
+}
+
+const { value } = Astro.props;
+
+// Helper function to render blocks
+function renderBlock(block: any): string {
+  if (!block) return '';
+
+  switch (block._type) {
+    case 'block':
+      return renderTextBlock(block);
+    case 'image':
+      return renderImageBlock(block);
+    default:
+      return '';
+  }
+}
+
+function renderTextBlock(block: any): string {
+  const style = block.style || 'normal';
+  const children = block.children || [];
+  
+  // Build text content
+  let textContent = children.map((child: any) => {
+    let text = child.text || '';
+    // Apply marks (bold, italic, etc.)
+    if (child.marks) {
+      child.marks.forEach((mark: string) => {
+        switch (mark) {
+          case 'strong':
+            text = `<strong>${text}</strong>`;
+            break;
+          case 'em':
+            text = `<em>${text}</em>`;
+            break;
+        }
+      });
+    }
+    return text;
+  }).join('');
+
+  // Wrap in appropriate element
+  switch (style) {
+    case 'h2':
+      return `<h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">${textContent}</h2>`;
+    case 'h3':
+      return `<h3 class="text-xl font-semibold text-gray-900 mt-8 mb-3">${textContent}</h3>`;
+    case 'blockquote':
+      return `<blockquote class="border-l-4 border-primary pl-4 italic text-gray-600 my-6">${textContent}</blockquote>`;
+    default:
+      if (block.listItem === 'bullet') {
+        return `<li class="text-gray-700 mb-1">${textContent}</li>`;
+      }
+      if (block.listItem === 'number') {
+        return `<li class="text-gray-700 mb-1">${textContent}</li>`;
+      }
+      return `<p class="text-gray-700 leading-relaxed mb-4">${textContent}</p>`;
+  }
+}
+
+function renderImageBlock(block: any): string {
+  const assetRef = block.asset?._ref || '';
+  const alt = block.alt || '';
+  const caption = block.caption || '';
+  
+  if (!assetRef) return '';
+  
+  // Extract image ID from reference
+  const match = assetRef.match(/image-([^-]+)-(\d+x\d+)-(.+)/);
+  if (!match) return '';
+  
+  const [, imageId, dimensions, format] = match;
+  const [width, height] = dimensions.split('x');
+  
+  const captionHtml = caption ? `<figcaption class="mt-2 text-center text-sm text-gray-600">${caption}</figcaption>` : '';
+  
+  return `
+    <figure class="my-8">
+      <img
+        src="https://cdn.sanity.io/images/\${import.meta.env.SANITY_PROJECT_ID || ''}/\${import.meta.env.SANITY_DATASET || 'production'}/\${imageId}-\${dimensions}.\${format}?w=1200&format=webp"
+        alt="\${alt}"
+        loading="lazy"
+        class="w-full rounded-lg"
+        width="\${width}"
+        height="\${height}"
+        style="aspect-ratio: \${width}/\${height};"
+      />
+      \${captionHtml}
+    </figure>
+  `;
+}
+
+// Process blocks and group list items
+function processBlocks(blocks: any[]): any[] {
+  const result: any[] = [];
+  let currentList: any = null;
+  
+  for (const block of blocks) {
+    if (block.listItem) {
+      if (!currentList || currentList.listType !== block.listItem) {
+        currentList = {
+          _type: 'list',
+          listType: block.listItem,
+          items: [],
+        };
+        result.push(currentList);
+      }
+      currentList.items.push(block);
+    } else {
+      currentList = null;
+      result.push(block);
+    }
+  }
+  
+  return result;
+}
+
+const processedBlocks = processBlocks(value || []);
+---
+
+<div class="prose prose-lg max-w-none">
+  {processedBlocks.map((block) => {
+    if (block._type === 'list') {
+      const listClass = block.listType === 'bullet' ? 'list-disc' : 'list-decimal';
+      return (
+        <ul class={`${listClass} list-inside mb-4 text-gray-700`}>
+          {block.items.map((item: any) => (
+            <li class="text-gray-700 mb-1">
+              {item.children?.map((child: any) => child.text).join('')}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    
+    if (block._type === 'image') {
+      const assetRef = block.asset?._ref || '';
+      const alt = block.alt || '';
+      const caption = block.caption || '';
+      
+      return (
+        <figure class="my-8">
+          <SmartImage
+            src={{
+              asset: { _ref: assetRef },
+              hotspot: block.hotspot,
+              crop: block.crop,
+            }}
+            alt={alt}
+            widths={[480, 800, 1200, 1920]}
+            class="w-full rounded-lg"
+          />
+          {caption && (
+            <figcaption class="mt-2 text-center text-sm text-gray-600">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+    
+    // Render text blocks
+    const style = block.style || 'normal';
+    const children = block.children || [];
+    const textContent = children.map((child: any) => child.text).join('');
+    
+    if (style === 'h2') {
+      return <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-4">{textContent}</h2>;
+    }
+    if (style === 'h3') {
+      return <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-3">{textContent}</h3>;
+    }
+    if (style === 'blockquote') {
+      return <blockquote class="border-l-4 border-primary pl-4 italic text-gray-600 my-6">{textContent}</blockquote>;
+    }
+    
+    return <p class="text-gray-700 leading-relaxed mb-4">{textContent}</p>;
+  })}
+</div>

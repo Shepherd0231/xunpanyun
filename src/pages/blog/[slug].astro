@@ -1,0 +1,292 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+
+// 静态路径生成
+export function getStaticPaths() {
+  const posts = [
+    {
+      slug: 'web-design-trends-2024',
+      title: '2024年外贸独立站设计趋势：简约与功能的完美平衡',
+      excerpt: '探索今年最流行的外贸网站设计趋势，从极简主义到微交互，了解如何让您的网站脱颖而出。',
+      category: 'design',
+      categoryName: '设计',
+      date: '2024-03-15',
+      readTime: '5分钟',
+      image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80',
+      content: `
+        <p>在数字化时代，网站设计趋势不断演变。2024年，我们看到一个明显的趋势：简约设计与功能性的完美融合。本文将深入探讨今年最值得关注的网站设计趋势。</p>
+        
+        <h2>1. 极简主义持续流行</h2>
+        <p>极简主义设计不仅美观，更能提升用户体验。通过减少视觉干扰，让用户专注于核心内容。留白、简洁的排版和克制的配色方案成为主流。</p>
+        
+        <h2>2. 微交互提升体验</h2>
+        <p>微交互是指那些细微的动画和反馈效果，如按钮悬停效果、加载动画等。这些细节能够显著提升用户参与度和满意度。</p>
+        
+        <h2>3. 响应式设计的新高度</h2>
+        <p>随着移动设备使用量的持续增长，响应式设计变得更加重要。2024年的趋势是"移动优先"，确保在各种设备上都能提供最佳体验。</p>
+        
+        <h2>4. 深色模式的普及</h2>
+        <p>深色模式不仅时尚，还能减少眼睛疲劳。越来越多的网站开始提供深色模式选项，让用户根据喜好和环境选择。</p>
+        
+        <h2>5. 可访问性成为标配</h2>
+        <p>网站可访问性不再是可选项，而是必需品。确保所有用户，包括残障人士，都能无障碍地访问和使用网站。</p>
+        
+        <h2>结语</h2>
+        <p>2024年的网站设计趋势强调简约、功能性和用户体验。作为外贸企业，紧跟这些趋势能够帮助您在激烈的国际竞争中脱颖而出。</p>
+      `,
+    },
+    {
+      slug: 'b2b-ecommerce-design-guide',
+      title: '外贸B2B电商网站设计：从产品展示到询盘转化',
+      excerpt: '深入解析外贸B2B电商网站的设计要点，从产品展示到询盘转化，打造高效的获客型网站。',
+      category: 'ecommerce',
+      categoryName: '电商',
+      date: '2024-03-10',
+      readTime: '8分钟',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80',
+      content: `
+        <p>外贸B2B电商网站与B2C有着本质的不同。B2B客户决策周期长、订单金额大、注重专业性。本文将深入解析如何从产品展示到询盘转化，打造高效的获客型B2B网站。</p>
+        
+        <h2>一、产品展示的专业性</h2>
+        <p>B2B客户关注产品的技术细节和专业认证：</p>
+        <ul>
+          <li>详细的产品规格参数表，包括尺寸、材质、技术参数</li>
+          <li>高清产品图片，多角度展示，支持放大查看</li>
+          <li>产品认证和检测报告展示，建立信任</li>
+          <li>应用案例和场景展示，帮助客户理解产品用途</li>
+        </ul>
+        
+        <h2>二、询盘入口的设计</h2>
+        <p>每个页面都应该有明确的询盘引导：</p>
+        <ul>
+          <li>产品页：明显的"获取报价"按钮，表单简洁</li>
+          <li>页脚：全站统一的快速联系入口</li>
+          <li>悬浮按钮：WhatsApp、邮件等即时沟通渠道</li>
+          <li>内容页：相关服务推荐，引导深度咨询</li>
+        </ul>
+        
+        <h2>三、信任体系的构建</h2>
+        <p>B2B交易建立在信任基础上：</p>
+        <ul>
+          <li>公司介绍页面：展示工厂、团队、资质</li>
+          <li>客户案例：真实的合作案例和成果数据</li>
+          <li>行业认证：ISO、CE等认证标志展示</li>
+          <li>客户评价：视频或文字形式的真实反馈</li>
+        </ul>
+        
+        <h2>四、技术性能要求</h2>
+        <p>B2B客户遍布全球，网站性能至关重要：</p>
+        <ul>
+          <li>全球CDN加速，确保各国访问速度</li>
+          <li>多语言支持，覆盖目标市场</li>
+          <li>移动端适配，支持随时查看</li>
+          <li>SEO优化，提升自然搜索排名</li>
+        </ul>
+        
+        <h2>结语</h2>
+        <p>外贸B2B网站设计的核心是"专业+转化"。通过专业的产品展示建立信任，通过精心设计的询盘入口获取线索，最终实现在线获客的目标。</p>
+      `,
+    },
+    {
+      slug: 'seo-optimization-guide',
+      title: '外贸网站SEO优化完全指南：从基础到进阶',
+      excerpt: '系统讲解外贸网站SEO优化的核心策略，包括关键词研究、技术SEO、内容优化等全方位内容。',
+      category: 'seo',
+      categoryName: 'SEO',
+      date: '2024-03-05',
+      readTime: '12分钟',
+      image: 'https://images.unsplash.com/photo-1572177812156-58036aae439c?w=1200&q=80',
+      content: `
+        <p>对于外贸企业来说，搜索引擎优化（SEO）是获取海外客户的重要渠道。本文将从基础到进阶，系统讲解外贸网站的SEO优化策略。</p>
+        
+        <h2>第一章：关键词研究</h2>
+        <p>关键词是SEO的基础。对于外贸网站，需要重点关注：</p>
+        <ul>
+          <li>产品关键词：描述您的产品或服务的词汇</li>
+          <li>行业关键词：行业相关的专业术语</li>
+          <li>长尾关键词：更具体、竞争度较低的词组</li>
+        </ul>
+        <p>使用工具如Google Keyword Planner、Ahrefs等进行关键词研究，找到搜索量适中、竞争度合理的关键词。</p>
+        
+        <h2>第二章：技术SEO</h2>
+        <p>技术SEO确保搜索引擎能够正确抓取和索引您的网站。关键要点包括：</p>
+        <ul>
+          <li>网站速度优化：压缩图片、启用缓存、使用CDN</li>
+          <li>移动友好性：确保网站在移动设备上表现良好</li>
+          <li>网站结构：清晰的URL结构和内部链接</li>
+          <li>XML站点地图：帮助搜索引擎发现所有页面</li>
+        </ul>
+        
+        <h2>第三章：内容优化</h2>
+        <p>高质量的内容是SEO成功的关键。创建内容时应注意：</p>
+        <ul>
+          <li>原创性：提供独特、有价值的信息</li>
+          <li>关键词布局：自然地融入关键词，避免堆砌</li>
+          <li>内容深度：全面覆盖主题，满足用户搜索意图</li>
+          <li>定期更新：保持内容新鲜度</li>
+        </ul>
+        
+        <h2>第四章：链接建设</h2>
+        <p>高质量的外部链接是提升网站权威性的重要因素。策略包括：</p>
+        <ul>
+          <li>创建值得链接的优质内容</li>
+          <li>行业目录提交</li>
+          <li>客座博客</li>
+          <li>合作伙伴链接</li>
+        </ul>
+        
+        <h2>结语</h2>
+        <p>SEO是一个长期的过程，需要持续的努力和优化。遵循本指南的策略，您的外贸网站将在搜索结果中获得更好的排名，吸引更多潜在客户。</p>
+      `,
+    },
+  ];
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const pageTitle = `${post.title} | 询盘云 InquiryCloud 博客`;
+
+const breadcrumbItems = [
+  { name: '博客', url: '/blog' },
+  { name: post.title, url: `/blog/${post.slug}`, isCurrent: true },
+];
+---
+
+<Layout title={pageTitle} description={post.excerpt}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={post.excerpt} ogType="article" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      author: {
+        type: 'Organization',
+        name: '询盘云 InquiryCloud',
+      },
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <span class="px-2 py-1 bg-teal-50 text-teal-600 text-xs rounded">{post.categoryName}</span>
+          <span class="text-stone-400 text-sm">{post.date}</span>
+          <span class="text-stone-300">·</span>
+          <span class="text-stone-400 text-sm">{post.readTime}阅读</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">{post.title}</h1>
+        <p class="text-stone-500 text-lg">{post.excerpt}</p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Featured Image -->
+  <Section class="py-0">
+    <Container>
+      <div class="max-w-4xl mx-auto">
+        <div class="aspect-[21/9] rounded overflow-hidden">
+          <SmartImage
+            src={post.image}
+            alt={post.title}
+            class="w-full h-full object-cover"
+            aspectRatio="21/9"
+          />
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Content Section -->
+  <Section>
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <article class="prose prose-stone max-w-none">
+          <div class="text-stone-600 leading-relaxed space-y-6" set:html={post.content} />
+        </article>
+
+        <!-- Share Section -->
+        <div class="mt-12 pt-8 border-t border-stone-100">
+          <p class="text-sm text-stone-400 mb-4">分享这篇文章</p>
+          <div class="flex gap-3">
+            <button class="w-10 h-10 rounded border border-stone-200 flex items-center justify-center text-stone-400 hover:border-stone-400 hover:text-stone-600 transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </button>
+            <button class="w-10 h-10 rounded border border-stone-200 flex items-center justify-center text-stone-400 hover:border-stone-400 hover:text-stone-600 transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </button>
+            <button class="w-10 h-10 rounded border border-stone-200 flex items-center justify-center text-stone-400 hover:border-stone-400 hover:text-stone-600 transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.623 4.823-4.351c.192-.192-.054-.3-.297-.108l-5.965 3.759-2.568-.802c-.56-.176-.57-.56.117-.828l10.037-3.869c.466-.174.875.108.713.827z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Related Posts Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-xl font-light text-stone-800 mb-6">相关文章</h2>
+        <div class="space-y-4">
+          <a href="/blog/landing-page-design-principles" class="block bg-white p-4 rounded border border-stone-100 hover:border-stone-200 transition-colors">
+            <h3 class="text-sm font-medium text-stone-800 mb-1">高转化率落地页的10个设计原则</h3>
+            <p class="text-stone-400 text-xs">基于数据的设计原则，帮助您打造转化率翻倍的营销落地页...</p>
+          </a>
+          <a href="/blog/website-performance-optimization" class="block bg-white p-4 rounded border border-stone-100 hover:border-stone-200 transition-colors">
+            <h3 class="text-sm font-medium text-stone-800 mb-1">网站性能优化：如何让你的网站加载速度提升50%</h3>
+            <p class="text-stone-400 text-xs">深入讲解网站性能优化的各种技巧，全面提升用户体验...</p>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Newsletter Section -->
+  <Section>
+    <Container>
+      <div class="max-w-2xl mx-auto text-center py-8">
+        <h2 class="text-2xl font-light text-stone-800 mb-4">订阅我们的博客</h2>
+        <p class="text-stone-500 mb-8">
+          获取更多独立站设计、SEO优化和电商运营的干货内容
+        </p>
+        <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="输入您的邮箱地址"
+            class="flex-1 px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-stone-400 focus:border-stone-400 transition-colors text-sm"
+            required
+          />
+          <button
+            type="submit"
+            class="px-6 py-3 bg-stone-800 text-white font-medium rounded hover:bg-stone-700 transition-colors text-sm"
+          >
+            立即订阅
+          </button>
+        </form>
+      </div>
+    </Container>
+  </Section>
+</Layout>

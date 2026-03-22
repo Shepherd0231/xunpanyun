@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import imageUrlBuilder from '@sanity/image-url';
+
+export interface SanityImageObject {
+  asset: {
+    _ref: string;
+    _type?: string;
+  };
+  hotspot?: {
+    x: number;
+    y: number;
+  };
+  crop?: {
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+  };
+}
+
+export interface Props {
+  src: string | SanityImageObject;
+  alt: string;
+  widths?: number[];
+  loading?: 'eager' | 'lazy';
+  class?: string;
+  aspectRatio?: string;
+}
+
+const {
+  src,
+  alt,
+  widths = [320, 640, 960, 1280, 1920],
+  loading = 'lazy',
+  class: className = '',
+  aspectRatio,
+} = Astro.props;
+
+const isExternalUrl = (url: string): boolean => {
+  return url.startsWith('http://') || url.startsWith('https://');
+};
+
+const isSanityImageObject = (obj: unknown): obj is SanityImageObject => {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    'asset' in obj &&
+    typeof (obj as SanityImageObject).asset === 'object' &&
+    '_ref' in (obj as SanityImageObject).asset
+  );
+};
+
+const sanityProjectId = import.meta.env.SANITY_PROJECT_ID || '';
+const sanityDataset = import.meta.env.SANITY_DATASET || 'production';
+
+let imageSrc: string | null = null;
+let isLocalImage = false;
+let isSanityImage = false;
+
+if (typeof src === 'string') {
+  if (isExternalUrl(src)) {
+    imageSrc = src;
+  } else {
+    isLocalImage = true;
+  }
+} else if (isSanityImageObject(src)) {
+  isSanityImage = true;
+  if (sanityProjectId) {
+    const builder = imageUrlBuilder({
+      projectId: sanityProjectId,
+      dataset: sanityDataset,
+    });
+    imageSrc = builder.image(src).format('webp').auto('format').url();
+  }
+}
+
+const aspectRatioStyle = aspectRatio ? `aspect-ratio: ${aspectRatio};` : '';
+const containerStyle = aspectRatioStyle || '';
+---
+
+{
+  isLocalImage && typeof src === 'string' ? (
+    <Image
+      src={src}
+      alt={alt}
+      widths={widths}
+      sizes={`(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw`}
+      loading={loading}
+      class={className}
+      style={containerStyle}
+    />
+  ) : imageSrc ? (
+    <img
+      src={imageSrc}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      class={className}
+      style={containerStyle}
+    />
+  ) : (
+    <div
+      class:list={['bg-gray-200 flex items-center justify-center', className]}
+      style={containerStyle}
+      role="img"
+      aria-label={alt}
+    >
+      <span class="text-gray-400 text-sm">Image unavailable</span>
+    </div>
+  )
+}

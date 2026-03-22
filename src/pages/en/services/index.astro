@@ -1,0 +1,185 @@
+---
+import Layout from '../../../components/layout/layout.astro';
+import Container from '../../../components/ui/container.astro';
+import Section from '../../../components/ui/section.astro';
+import Breadcrumbs from '../../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../../components/media/smart-image.astro';
+import SEO from '../../../components/seo/seo.astro';
+import Schema from '../../../components/seo/schema.astro';
+
+const pageTitle = 'Services | InquiryCloud - Lead Generation System';
+const pageDescription = 'InquiryCloud services: Lead generation system setup, e-commerce lead system, multi-language global system, website upgrade.';
+
+const breadcrumbItems = [
+  { name: 'Services', url: '/en/services', isCurrent: true },
+];
+
+const services = [
+  {
+    id: 'acquisition',
+    title: 'Lead Generation System Setup',
+    subtitle: 'Acquisition System',
+    description: 'Build a complete lead generation system from scratch, including multi-channel inquiry capture, high-conversion structure design, and content growth architecture.',
+    features: [
+      'Multi-channel inquiry entry (chat/email/forms/social)',
+      'Conversion triggers on any page',
+      'High-converting CTA layout and guidance',
+      'Automatic lead recording and notification',
+      'SEO-optimized architecture',
+      'Responsive design for mobile',
+    ],
+    price: 'From $2,200',
+    timeline: '3-5 weeks',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+    highlight: true,
+  },
+  {
+    id: 'ecommerce',
+    title: 'E-commerce Lead System',
+    subtitle: 'E-commerce + Acquisition',
+    description: 'Custom e-commerce lead generation website development - not just an online store, but an automated lead engine.',
+    features: [
+      'Custom e-commerce lead website',
+      'High-converting product page design',
+      'Shopping cart recovery mechanism',
+      'Member system and repurchase guidance',
+      'Multi-language and multi-currency',
+      'Payment gateway integration',
+    ],
+    price: 'From $3,500',
+    timeline: '4-6 weeks',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+    icon: 'M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z',
+  },
+  {
+    id: 'multilingual',
+    title: 'Multi-Language Global System',
+    subtitle: 'Global Acquisition',
+    description: 'One system covering multiple country markets, unified multi-language management, consistent global experience.',
+    features: [
+      'Multi-language website architecture',
+      'Language switching and URL optimization',
+      'Localized SEO configuration',
+      'CDN global acceleration',
+      'Unified backend management',
+      'Content synchronization across languages',
+    ],
+    price: 'From $4,200',
+    timeline: '5-7 weeks',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    id: 'upgrade',
+    title: 'Website Lead Capability Upgrade',
+    subtitle: 'Acquisition Upgrade',
+    description: 'Comprehensive lead capability transformation for existing websites - add inquiry entry points, optimize conversion paths, improve SEO.',
+    features: [
+      'Existing website lead capability audit',
+      'Add and optimize inquiry entry points',
+      'Conversion path redesign',
+      'SEO architecture reconstruction',
+      'Page loading speed optimization',
+      'Data tracking and analytics setup',
+    ],
+    price: 'From $1,100',
+    timeline: '2-4 weeks',
+    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80',
+    icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'Service',
+      name: 'InquiryCloud Services',
+      description: pageDescription,
+      url: 'https://example.com/en/services',
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Our Services</span>
+        <h1 class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+          Professional <span class="text-teal-700">Lead Generation</span> Services
+        </h1>
+        <p class="text-lg text-stone-500 leading-relaxed">
+          From system setup to capability upgrade, we provide comprehensive lead generation solutions for foreign trade enterprises
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Services List -->
+  <Section>
+    <Container>
+      <div class="space-y-16">
+        {services.map((service, index) => (
+          <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+            <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+              <div class="aspect-[4/3] rounded overflow-hidden">
+                <SmartImage
+                  src={service.image}
+                  alt={service.title}
+                  class="w-full h-full object-cover"
+                  aspectRatio="4/3"
+                />
+              </div>
+            </div>
+            <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 text-teal-700 rounded text-sm mb-4">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d={service.icon} stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {service.subtitle}
+              </div>
+              <h2 class="text-2xl md:text-3xl font-light text-stone-800 mb-4">{service.title}</h2>
+              <p class="text-stone-500 mb-6 leading-relaxed">{service.description}</p>
+              
+              <ul class="space-y-3 mb-8">
+                {service.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                    </svg>
+                    <span class="text-stone-600 text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              
+              <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-stone-100">
+                <div>
+                  <p class="text-xs text-stone-400 mb-1">Starting from</p>
+                  <p class="text-xl font-medium text-teal-700">{service.price}</p>
+                </div>
+                <div>
+                  <p class="text-xs text-stone-400 mb-1">Timeline</p>
+                  <p class="text-sm text-stone-700">{service.timeline}</p>
+                </div>
+                <a
+                  href="/en/contact"
+                  class="ml-auto inline-flex items-center gap-2 px-6 py-2.5 bg-stone-800 text-white text-sm font-medium rounded hover:bg-stone-700 transition-colors"
+                >
+                  Get Quote
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</Layout>

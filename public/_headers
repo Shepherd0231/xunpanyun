@@ -1,0 +1,33 @@
+# Cloudflare Pages Security Headers
+# https://developers.cloudflare.com/pages/platform/headers/
+
+/*
+  # Content Security Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self'; connect-src 'self' https://api.resend.com; frame-ancestors 'none';
+  
+  # XSS Protection
+  X-XSS-Protection: 1; mode=block
+  
+  # Content Type Options
+  X-Content-Type-Options: nosniff
+  
+  # Frame Options
+  X-Frame-Options: DENY
+  
+  # Referrer Policy
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # Permissions Policy
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  
+  # HSTS (HTTPS Strict Transport Security)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+/sitemap.xml
+  Content-Type: application/xml
+
+/sitemap-*.xml
+  Content-Type: application/xml
+
+/rss.xml
+  Content-Type: application/rss+xml

@@ -1,0 +1,486 @@
+---
+import Layout from '../components/layout/layout.astro';
+import Container from '../components/ui/container.astro';
+import Section from '../components/ui/section.astro';
+import Breadcrumbs from '../components/ui/breadcrumbs.astro';
+import SEO from '../components/seo/seo.astro';
+import Schema from '../components/seo/schema.astro';
+
+const pageTitle = '联系我们 | 获取询盘增长方案';
+const pageDescription = '联系我们获取外贸获客系统方案。高转化网站设计，帮您持续拿询盘。24小时内响应，免费咨询。';
+
+const breadcrumbItems = [
+  { name: '联系我们', url: '/contact', isCurrent: true },
+];
+
+const contactInfo = {
+  company: '询盘云 InquiryCloud',
+  address: '深圳市南山区科技园',
+  phone: '+86 400-888-8888',
+  email: 'hello@xunpanyun.com',
+  workingHours: '周一至周五: 9:00 - 18:00 (GMT+8)',
+};
+
+const faqs = [
+  {
+    question: '做一个获客型网站需要多长时间？',
+    answer: '标准企业获客网站需要2-3周，包含SEO优化和内容架构。电商型获客网站需要4-6周。询盘云让您的独立站成为24小时自动获客系统。',
+  },
+  {
+    question: '网站能带来多少询盘？',
+    answer: '根据客户数据，平均询盘量提升3-5倍。网站上线后，通过SEO内容增长，询盘量会持续增加。我们提供的不只是网站，而是持续获客能力。',
+  },
+  {
+    question: '你们使用什么技术栈？',
+    answer: '询盘云采用现代化技术架构，确保网站性能优异、SEO友好、全球访问速度快。网站几乎不需要维护，可长期稳定运行。',
+  },
+  {
+    question: '网站上线后如何更新内容？',
+    answer: '我们提供易用的内容管理系统，非技术人员也能随时新增产品、文章。支持批量导入，适合产品多的外贸企业。网站可持续进化，不是做完就结束。',
+  },
+  {
+    question: '是否支持多语言版本？',
+    answer: '是的，一套系统可支持多个语言版本，面向不同国家客户。无论客户在哪个国家，都能获得一致的访问体验，帮您覆盖全球市场。',
+  },
+];
+
+const trustBadges = [
+  { icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z', text: '数据安全保障' },
+  { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', text: '24小时响应' },
+  { icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', text: '200+企业信赖' },
+  { icon: 'M13 10V3L4 14h7v7l9-11h-7z', text: '极速上线' },
+];
+
+const stats = [
+  { value: '3-5倍', label: '平均询盘提升' },
+  { value: '24h', label: '快速响应' },
+  { value: '200+', label: '服务企业' },
+  { value: '99.9%', label: '系统稳定性' },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'Organization',
+      name: contactInfo.company,
+      description: pageDescription,
+      contactPoint: {
+        telephone: contactInfo.phone,
+        contactType: 'Sales',
+        email: contactInfo.email,
+      },
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section - 强化转化 -->
+  <Section class="bg-gradient-to-br from-stone-50 to-stone-100">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block text-xs tracking-widest text-teal-600 uppercase mb-3">免费咨询</span>
+        <h1 class="text-4xl md:text-5xl font-light text-stone-800 mb-6 leading-tight">
+          开启您的
+          <span class="text-teal-700">自动获客系统</span>
+        </h1>
+        <p class="text-lg text-stone-500 mb-8 leading-relaxed">
+          询盘云让您的独立站成为自动获客系统。填写下方表单，24小时内获取专属获客方案
+        </p>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+          {stats.map((stat) => (
+            <div class="text-center">
+              <div class="text-2xl md:text-3xl font-light text-teal-700 mb-1">{stat.value}</div>
+              <div class="text-xs text-stone-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Contact Section - 多路径转化 -->
+  <Section>
+    <Container>
+      <div class="grid lg:grid-cols-5 gap-12">
+        <!-- Contact Form - 强化转化 -->
+        <div class="lg:col-span-3 bg-white p-8 rounded-lg border border-stone-100 shadow-sm">
+          <div class="mb-6">
+            <h2 class="text-xl font-medium text-stone-800 mb-2">获取专属获客方案</h2>
+            <p class="text-stone-500 text-sm">告诉我们您的行业和需求，我们将为您定制高转化网站方案</p>
+          </div>
+          
+          <form id="contactForm" action="/api/submit" method="POST" class="space-y-5">
+            <div class="grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="firstName" class="block text-sm text-stone-600 mb-2">
+                  联系人姓名 <span class="text-teal-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+                  placeholder="您的姓名"
+                />
+              </div>
+              <div>
+                <label for="company" class="block text-sm text-stone-600 mb-2">
+                  公司名称 <span class="text-teal-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+                  placeholder="您的公司"
+                />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="email" class="block text-sm text-stone-600 mb-2">
+                  邮箱地址 <span class="text-teal-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label for="phone" class="block text-sm text-stone-600 mb-2">
+                  联系电话 <span class="text-teal-600">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+                  placeholder="+86 123 4567 8900"
+                />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="industry" class="block text-sm text-stone-600 mb-2">
+                  所属行业 <span class="text-teal-600">*</span>
+                </label>
+                <select
+                  id="industry"
+                  name="industry"
+                  required
+                  class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+                >
+                  <option value="">请选择行业</option>
+                  <option value="machinery">机械设备</option>
+                  <option value="electronics">电子电器</option>
+                  <option value="textile">纺织服装</option>
+                  <option value="chemical">化工材料</option>
+                  <option value="building">建材家居</option>
+                  <option value="medical">医疗器械</option>
+                  <option value="other">其他行业</option>
+                </select>
+              </div>
+              <div>
+                <label for="targetMarket" class="block text-sm text-stone-600 mb-2">
+                  目标市场
+                </label>
+                <select
+                  id="targetMarket"
+                  name="targetMarket"
+                  class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+                >
+                  <option value="">请选择目标市场</option>
+                  <option value="north-america">北美</option>
+                  <option value="europe">欧洲</option>
+                  <option value="southeast-asia">东南亚</option>
+                  <option value="middle-east">中东</option>
+                  <option value="africa">非洲</option>
+                  <option value="global">全球</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="currentWebsite" class="block text-sm text-stone-600 mb-2">
+                现有网站情况
+              </label>
+              <select
+                id="currentWebsite"
+                name="currentWebsite"
+                class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm"
+              >
+                <option value="">请选择</option>
+                <option value="none">还没有网站</option>
+                <option value="old">有网站但效果差</option>
+                <option value="need-upgrade">需要改版升级</option>
+                <option value="new-project">全新项目</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm text-stone-600 mb-2">
+                具体需求描述
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full px-4 py-3 border border-stone-200 rounded focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors bg-stone-50/50 text-sm resize-none"
+                placeholder="请描述您的产品类型、目标客户、期望的询盘量等..."
+              ></textarea>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="flex flex-wrap gap-4 py-4 border-t border-stone-100">
+              {trustBadges.map((badge) => (
+                <div class="flex items-center gap-2 text-stone-400">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d={badge.icon} stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="text-xs">{badge.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="submit"
+              class="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-teal-700 text-white font-medium rounded hover:bg-teal-800 transition-colors text-base"
+            >
+              <span>获取专属方案</span>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            
+            <p class="text-center text-xs text-stone-400">
+              提交后24小时内，我们的获客顾问将与您联系
+            </p>
+          </form>
+        </div>
+
+        <!-- Multiple Contact Channels - 全渠道询盘获取 -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- 即时沟通 -->
+          <div class="bg-gradient-to-br from-teal-50 to-teal-100/50 p-6 rounded-lg border border-teal-100">
+            <h3 class="text-lg font-medium text-stone-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              即时沟通
+            </h3>
+            <p class="text-sm text-stone-500 mb-4">实时在线咨询，快速解答您的疑问</p>
+            <a
+              href={`https://wa.me/${contactInfo.phone.replace(/\D/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white rounded text-sm hover:bg-teal-700 transition-colors w-full justify-center"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span>WhatsApp 咨询</span>
+            </a>
+          </div>
+
+          <!-- 邮件沟通 -->
+          <div class="bg-stone-50 p-6 rounded-lg border border-stone-100">
+            <h3 class="text-lg font-medium text-stone-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              邮件咨询
+            </h3>
+            <p class="text-sm text-stone-500 mb-4">发送详细需求，获取正式报价</p>
+            <a
+              href={`mailto:${contactInfo.email}?subject=询盘系统咨询&body=您好，我想了解外贸获客网站方案...`}
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-700 text-white rounded text-sm hover:bg-stone-800 transition-colors w-full justify-center"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>发送邮件</span>
+            </a>
+          </div>
+
+          <!-- 电话联系 -->
+          <div class="bg-stone-50 p-6 rounded-lg border border-stone-100">
+            <h3 class="text-lg font-medium text-stone-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              电话咨询
+            </h3>
+            <p class="text-sm text-stone-500 mb-4">直接沟通，快速了解方案</p>
+            <a
+              href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
+              class="inline-flex items-center gap-2 px-5 py-2.5 border border-stone-300 text-stone-700 rounded text-sm hover:bg-stone-100 transition-colors w-full justify-center"
+            >
+              <span>{contactInfo.phone}</span>
+            </a>
+          </div>
+
+          <!-- 工作时间 -->
+          <div class="p-4 bg-stone-50 rounded border border-stone-100">
+            <div class="flex items-center gap-3 text-sm text-stone-500">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="12 6 12 12 16 14" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>{contactInfo.workingHours}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Why Choose Us - 核心价值展示 -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-xs tracking-widest text-teal-600 uppercase mb-3">核心价值</span>
+        <h2 class="text-3xl font-light text-stone-800 mb-4">为什么选择我们</h2>
+        <p class="text-stone-500">询盘云让您的独立站成为自动获客系统</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-lg border border-stone-100">
+          <div class="w-12 h-12 flex items-center justify-center rounded bg-teal-50 text-teal-600 mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-stone-800 mb-2">高转化设计</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">每个页面都带转化引导，任意页面都能触发询盘。网站=24小时销售人员</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg border border-stone-100">
+          <div class="w-12 h-12 flex items-center justify-center rounded bg-teal-50 text-teal-600 mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-stone-800 mb-2">全球覆盖</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">多语言支持，全球访问速度一致。一套系统，覆盖多个国家市场</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg border border-stone-100">
+          <div class="w-12 h-12 flex items-center justify-center rounded bg-teal-50 text-teal-600 mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-stone-800 mb-2">持续增长</h3>
+          <p class="text-sm text-stone-500 leading-relaxed">内容可持续增长，流量持续增加。网站是资产，不是一次性项目</p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- FAQ Section -->
+  <Section>
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">FAQ</span>
+        <h2 class="text-3xl font-light text-stone-800 mb-4">常见问题</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-4">
+        {faqs.map((faq) => (
+          <div class="bg-white rounded-lg border border-stone-100 p-6">
+            <h3 class="text-sm font-medium text-stone-800 mb-2">{faq.question}</h3>
+            <p class="text-stone-500 text-sm leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Bottom CTA -->
+  <Section class="bg-gradient-to-br from-stone-800 to-stone-900 text-white">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-light mb-4">准备好持续获取询盘了吗？</h2>
+        <p class="text-stone-300 mb-8">
+          高转化 + 可规模增长 + 可长期运营。让我们一起构建您的自动获客系统
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#"
+            onclick="document.getElementById('firstName').focus(); return false;"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-teal-600 text-white font-medium rounded hover:bg-teal-700 transition-colors"
+          >
+            <span>立即获取方案</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a
+            href={`https://wa.me/${contactInfo.phone.replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-stone-600 text-white font-medium rounded hover:bg-stone-800 transition-colors"
+          >
+            <span>WhatsApp咨询</span>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>
+
+<script>
+  // Contact form submission handler
+  const form = document.getElementById('contactForm');
+  const submitBtn = form?.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn?.innerHTML;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!submitBtn) return;
+    
+    // Disable button and show loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>提交中...</span>';
+    
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('/api/submit/', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        // Show success message
+        alert(result.message || '提交成功！我们将在24小时内与您联系。');
+        form.reset();
+      } else {
+        // Show error message
+        alert(result.error || '提交失败，请稍后重试。');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('提交失败，请稍后重试或通过电话联系我们。');
+    } finally {
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText || '<span>获取专属方案</span>';
+    }
+  });
+</script>

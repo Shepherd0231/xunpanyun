@@ -1,0 +1,397 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import InquiryCTA from '../../components/communication/inquiry-cta.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+
+const pageTitle = 'Foreign Trade Lead Generation System | InquiryCloud';
+const pageDescription = 'InquiryCloud transforms your independent website into an automated lead generation system. High conversion + scalable growth + long-term operation.';
+
+const capabilities = [
+  {
+    title: 'Multi-Channel Lead Capture',
+    description: 'Instant chat, email, forms, and social media integration - never miss a potential customer',
+    icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+  },
+  {
+    title: 'Conversion on Every Page',
+    description: 'Every page can guide inquiries - browsing equals conversion path, not just display',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  },
+  {
+    title: 'High-Converting Structure',
+    description: 'Product, service, and blog pages all include call-to-action - your website becomes a 24/7 salesperson',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Content-Driven Growth',
+    description: 'Sustainable expansion of products, articles, and cases - continuous traffic growth',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  },
+  {
+    title: 'Global Multi-Language Coverage',
+    description: 'One system covers multiple country markets with consistent global experience',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Lead Tracking & Recording',
+    description: 'All customer information automatically saved - build customer assets, not just one-time traffic',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+  },
+];
+
+const features = [
+  {
+    step: '01',
+    title: 'Automated Lead Gen',
+    description: 'Multi-channel inquiry entry points, conversion triggers on any page',
+  },
+  {
+    step: '02',
+    title: 'Content Growth',
+    description: 'Scalable product/article/case system for continuous traffic growth',
+  },
+  {
+    step: '03',
+    title: 'Global Sales',
+    description: 'Multi-language coverage, consistent global experience',
+  },
+  {
+    step: '04',
+    title: 'Long-term Operation',
+    description: 'Non-technical staff can update, near-zero maintenance cost',
+  },
+];
+
+const results = [
+  {
+    value: '3-5x',
+    label: 'Lead Increase',
+    desc: 'Average client growth',
+  },
+  {
+    value: '200+',
+    label: 'Deployments',
+    desc: 'Enterprise systems',
+  },
+  {
+    value: '98%',
+    label: 'Retention',
+    desc: 'Continued partnership',
+  },
+  {
+    value: '24/7',
+    label: 'Auto Lead Gen',
+    desc: 'Year-round operation',
+  },
+];
+
+const testimonials = [
+  {
+    content: 'InquiryCloud transformed our website into a real lead generation engine. In 3 months, inquiries increased 4x with high quality.',
+    author: 'Mr. Zhang',
+    company: 'Machinery Export Company',
+    result: 'Leads +320%',
+  },
+  {
+    content: 'Our website used to be just a showcase, now every page brings consultations. SEO traffic keeps growing too.',
+    author: 'Manager Li',
+    company: 'Home Furnishing Brand',
+    result: 'Organic +180%',
+  },
+  {
+    content: 'Multi-language versions helped us open European markets. One system manages all sites - efficiency improved dramatically.',
+    author: 'Director Wang',
+    company: 'Electronics Enterprise',
+    result: '5 Countries Covered',
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'Organization',
+      name: 'InquiryCloud',
+      description: pageDescription,
+      url: 'https://example.com',
+      contactPoint: {
+        telephone: '+86-400-888-8888',
+        contactType: 'Sales',
+        email: 'hello@xunpanyun.com',
+      },
+    }}
+  />
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[700px] lg:min-h-[800px] flex items-center">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-stone-50 via-white to-stone-100"></div>
+      <div class="absolute top-20 right-20 w-64 h-64 bg-teal-100/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 left-20 w-48 h-48 bg-stone-200/30 rounded-full blur-3xl"></div>
+    </div>
+    
+    <Container class="relative z-10 py-20">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="max-w-xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 text-teal-700 rounded text-sm mb-6 border border-teal-100">
+            <span class="w-1.5 h-1.5 bg-teal-600 rounded-full"></span>
+            Lead Generation System for Foreign Trade
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-stone-800 mb-6 leading-tight tracking-tight">
+            Transform Your Website Into an
+            <span class="font-normal text-teal-700">Automated Lead System</span>
+          </h1>
+          <p class="text-lg text-stone-500 mb-8 leading-relaxed">
+            High conversion + scalable growth + long-term operation. A complete solution for foreign trade businesses to continuously acquire leads.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href="/en/contact"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-stone-800 text-white font-medium rounded hover:bg-stone-700 transition-colors"
+            >
+              <span>Get Free Proposal</span>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a
+              href="/en/cases"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-stone-700 font-medium rounded hover:bg-stone-50 transition-colors border border-stone-200"
+            >
+              <span>View Client Results</span>
+            </a>
+          </div>
+          
+          <div class="mt-12 pt-8 border-t border-stone-200">
+            <p class="text-sm text-stone-400 mb-4">Helped 200+ foreign trade businesses achieve growth</p>
+            <div class="flex flex-wrap items-center gap-6">
+              <div class="flex items-center gap-2 text-stone-500">
+                <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                </svg>
+                <span class="text-sm">Multi-Channel Leads</span>
+              </div>
+              <div class="flex items-center gap-2 text-stone-500">
+                <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                </svg>
+                <span class="text-sm">Content Growth</span>
+              </div>
+              <div class="flex items-center gap-2 text-stone-500">
+                <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                </svg>
+                <span class="text-sm">Multi-Language</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative hidden lg:block">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-stone-200/50 rounded-lg blur-2xl"></div>
+            <div class="relative bg-white rounded-lg shadow-sm border border-stone-100 p-3">
+              <SmartImage
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                alt="Lead Generation System"
+                class="w-full rounded"
+                aspectRatio="4/3"
+                loading="eager"
+              />
+              <div class="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-sm border border-stone-100 p-4 flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-50 rounded flex items-center justify-center">
+                  <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-stone-400">Average Lead Increase</p>
+                  <p class="text-lg font-medium text-stone-700">3-5x</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Core Value Section -->
+  <Section class="bg-stone-900 text-stone-300">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block text-xs tracking-widest text-stone-500 uppercase mb-3">Core Value</span>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-100 mb-4">
+          Continuous Lead Generation for Your Business
+        </h2>
+        <p class="text-stone-400">
+          InquiryCloud transforms your website into "Automated Lead System + Content Growth System + Global Sales Portal"
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Capabilities Section -->
+  <Section id="capabilities" class="bg-white">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">System Capabilities</span>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">System Capability Matrix</h2>
+        <p class="text-stone-500">
+          9 core capabilities to build a foreign trade lead generation system that drives real business growth
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {capabilities.map((item) => (
+          <div class="group p-8 bg-stone-50 rounded border border-stone-100 hover:border-teal-200 hover:bg-teal-50/30 transition-all">
+            <div class="w-12 h-12 rounded bg-white border border-stone-200 flex items-center justify-center mb-6 group-hover:border-teal-200 group-hover:bg-teal-50 transition-colors">
+              <svg class="w-6 h-6 text-stone-600 group-hover:text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d={item.icon} stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-stone-800 mb-2">{item.title}</h3>
+            <p class="text-stone-500 text-sm leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- How It Works Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">How It Works</span>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-800 mb-4">Four Core Mechanisms</h2>
+        <p class="text-stone-500">
+          From lead generation to growth, from local to global - building a complete business growth loop
+        </p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-8">
+        {features.map((item, index) => (
+          <div class="relative text-center">
+            <div class="text-5xl font-extralight text-teal-200 mb-4">{item.step}</div>
+            <h3 class="text-base font-medium text-stone-800 mb-2">{item.title}</h3>
+            <p class="text-stone-500 text-sm leading-relaxed">{item.description}</p>
+            {index < features.length - 1 && (
+              <div class="hidden md:block absolute top-6 left-full w-full h-px bg-stone-200"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Results Section -->
+  <Section class="bg-white">
+    <Container>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8">
+        {results.map((item) => (
+          <div class="text-center">
+            <div class="text-4xl font-light text-teal-700 mb-1">{item.value}</div>
+            <div class="text-sm font-medium text-stone-700 mb-1">{item.label}</div>
+            <div class="text-xs text-stone-400">{item.desc}</div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Testimonials Section -->
+  <Section class="bg-stone-900 text-stone-300">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-xs tracking-widest text-stone-500 uppercase mb-3">Client Results</span>
+        <h2 class="text-3xl md:text-4xl font-light text-stone-100 mb-4">Real Client Results</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {testimonials.map((item) => (
+          <div class="bg-stone-800/50 rounded p-8 border border-stone-700">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="px-2 py-1 bg-teal-900/50 text-teal-400 text-xs rounded">{item.result}</span>
+            </div>
+            <p class="text-stone-400 text-sm leading-relaxed mb-6">"{item.content}"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-stone-700 flex items-center justify-center text-xs text-stone-400">
+                {item.author[0]}
+              </div>
+              <div>
+                <p class="text-sm text-stone-300">{item.author}</p>
+                <p class="text-xs text-stone-500">{item.company}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Why Choose Us Section -->
+  <Section>
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Why Us</span>
+          <h2 class="text-3xl font-light text-stone-800 mb-6">Why Choose Us?</h2>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <span class="text-teal-600 font-medium text-sm">01</span>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">Foreign Trade Expertise</h3>
+                <p class="text-stone-500 text-sm">Deep understanding of foreign trade business scenarios to optimize every conversion point</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <span class="text-teal-600 font-medium text-sm">02</span>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">System Thinking, Long-term Value</h3>
+                <p class="text-stone-500 text-sm">Built for scalability from day one - your website evolves with your business growth</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <span class="text-teal-600 font-medium text-sm">03</span>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">Data-Driven Optimization</h3>
+                <p class="text-stone-500 text-sm">Every design decision backed by data to maximize conversion effectiveness</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                <span class="text-teal-600 font-medium text-sm">04</span>
+              </div>
+              <div>
+                <h3 class="font-medium text-stone-800 mb-1">Zero Learning Curve</h3>
+                <p class="text-stone-500 text-sm">Non-technical staff can easily update content - truly autonomous operation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded overflow-hidden">
+            <SmartImage
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+              alt="Why Choose Us"
+              class="w-full h-full object-cover"
+              aspectRatio="4/3"
+            />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Inquiry CTA -->
+  <InquiryCTA />
+</Layout>

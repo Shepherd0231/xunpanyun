@@ -1,0 +1,68 @@
+---
+export interface Props {
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  canonicalUrl?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  lang?: string;
+  alternateLangs?: Array<{
+    lang: string;
+    url: string;
+  }>;
+}
+
+const {
+  seoTitle,
+  seoDescription,
+  ogImage,
+  ogType = 'website',
+  canonicalUrl,
+  noindex = false,
+  nofollow = false,
+  lang = 'zh-CN',
+  alternateLangs = [],
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://example.com';
+const currentPath = Astro.url.pathname;
+const fullCanonicalUrl = canonicalUrl || `${siteUrl}${currentPath}`;
+
+const robotsContent = [
+  noindex ? 'noindex' : 'index',
+  nofollow ? 'nofollow' : 'follow',
+].join(', ');
+---
+
+<!-- Canonical URL -->
+<link rel="canonical" href={fullCanonicalUrl} />
+
+<!-- Robots Meta -->
+<meta name="robots" content={robotsContent} />
+
+<!-- Alternate Languages (hreflang) -->
+{alternateLangs.map((alt) => (
+  <link rel="alternate" hreflang={alt.lang} href={`${siteUrl}${alt.url}`} />
+))}
+{alternateLangs.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={fullCanonicalUrl} />
+)}
+
+<!-- Open Graph -->
+{seoTitle && <meta property="og:title" content={seoTitle} />}
+{seoDescription && <meta property="og:description" content={seoDescription} />}
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={fullCanonicalUrl} />
+{ogImage && <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`} />}
+<meta property="og:locale" content={lang.replace('-', '_')} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+{seoTitle && <meta name="twitter:title" content={seoTitle} />}
+{seoDescription && <meta name="twitter:description" content={seoDescription} />}
+{ogImage && <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`} />}
+
+<!-- Additional SEO Meta -->
+{seoDescription && <meta name="description" content={seoDescription} />}

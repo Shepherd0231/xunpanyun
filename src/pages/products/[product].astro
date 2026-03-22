@@ -1,0 +1,172 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import InquiryCTA from '../../components/communication/inquiry-cta.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+import { slugify } from '../../utils/slugify';
+
+export function getStaticPaths() {
+  const products = [
+    {
+      id: '1',
+      title: 'CNC Precision Machining Parts',
+      description: 'High-precision CNC machined components for industrial applications. Tolerance up to ±0.001mm.',
+      fullDescription: 'Our CNC precision machining parts are manufactured using state-of-the-art 5-axis CNC machines. We specialize in producing complex geometries with tight tolerances for aerospace, automotive, and medical industries. All parts undergo rigorous quality inspection before delivery.',
+      image: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&q=80',
+      category: 'Machining',
+      material: 'Aluminum, Steel, Titanium',
+      moq: '100 pieces',
+      leadTime: '2-4 weeks',
+      certifications: ['ISO 9001', 'AS9100'],
+    },
+    {
+      id: '2',
+      title: 'Custom Metal Fabrication',
+      description: 'Professional metal fabrication services including cutting, bending, welding, and assembly.',
+      fullDescription: 'We provide comprehensive metal fabrication services from prototype to production. Our capabilities include laser cutting, CNC bending, robotic welding, and powder coating. We work with various materials including carbon steel, stainless steel, and aluminum.',
+      image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80',
+      category: 'Fabrication',
+      material: 'Carbon Steel, Stainless Steel, Aluminum',
+      moq: '50 pieces',
+      leadTime: '3-5 weeks',
+      certifications: ['ISO 9001', 'AWS D1.1'],
+    },
+    {
+      id: '3',
+      title: 'Industrial Automation Components',
+      description: 'Custom automation parts and assemblies for manufacturing equipment.',
+      fullDescription: 'Our industrial automation components are designed for reliability and precision. We manufacture conveyor parts, robotic end-effectors, fixture components, and custom automation assemblies tailored to your production requirements.',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
+      category: 'Automation',
+      material: 'Steel, Aluminum, Engineering Plastics',
+      moq: '200 pieces',
+      leadTime: '4-6 weeks',
+      certifications: ['ISO 9001', 'CE'],
+    },
+  ];
+  
+  return products.map((product) => ({
+    params: { product: slugify(product.title) },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+
+const breadcrumbItems = [
+  { name: 'Products', url: '/products' },
+  { name: product.title, url: `/products/${slugify(product.title)}`, isCurrent: true },
+];
+
+const pageTitle = `${product.title} | 询盘云 InquiryCloud`;
+---
+
+<Layout title={pageTitle} description={product.description}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={product.description} ogType="product" />
+  <Schema
+    slot="head"
+    schema={[
+      {
+        type: 'Product',
+        name: product.title,
+        description: product.description,
+        image: product.image,
+        brand: '询盘云 InquiryCloud',
+        offers: {
+          availability: 'https://schema.org/InStock',
+        },
+      },
+      {
+        type: 'BreadcrumbList',
+        items: [
+          { name: 'Home', url: '/' },
+          { name: 'Products', url: '/products' },
+          { name: product.title, url: `/products/${slugify(product.title)}` },
+        ],
+      },
+    ]}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Product Hero -->
+  <Section class="bg-gray-50">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+          <SmartImage
+            src={product.image}
+            alt={product.title}
+            class="w-full h-full object-cover"
+            aspectRatio="4/3"
+            loading="eager"
+          />
+        </div>
+        <div>
+          <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
+            {product.category}
+          </span>
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{product.title}</h1>
+          <p class="text-lg text-gray-600 mb-6">{product.fullDescription}</p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+            >
+              <span>Request a Quote</span>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
+            >
+              <span>Download Spec Sheet</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Product Details -->
+  <Section>
+    <Container>
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Product Specifications</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-semibold text-gray-900 mb-2">Material</h3>
+            <p class="text-gray-600">{product.material}</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-semibold text-gray-900 mb-2">Minimum Order Quantity</h3>
+            <p class="text-gray-600">{product.moq}</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-semibold text-gray-900 mb-2">Lead Time</h3>
+            <p class="text-gray-600">{product.leadTime}</p>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-semibold text-gray-900 mb-2">Certifications</h3>
+            <div class="flex flex-wrap gap-2">
+              {product.certifications.map((cert) => (
+                <span class="px-3 py-1 bg-white border border-gray-200 rounded text-sm text-gray-700">
+                  {cert}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Inquiry CTA -->
+  <InquiryCTA />
+</Layout>

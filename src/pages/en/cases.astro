@@ -1,0 +1,364 @@
+---
+import Layout from '../../components/layout/layout.astro';
+import Container from '../../components/ui/container.astro';
+import Section from '../../components/ui/section.astro';
+import Breadcrumbs from '../../components/ui/breadcrumbs.astro';
+import SmartImage from '../../components/media/smart-image.astro';
+import SEO from '../../components/seo/seo.astro';
+import Schema from '../../components/seo/schema.astro';
+
+const pageTitle = 'Client Results | InquiryCloud - Lead Generation Case Studies';
+const pageDescription = 'See how InquiryCloud helps clients achieve lead generation results, with average inquiry volume increasing 3-5x, driving real business growth.';
+
+const breadcrumbItems = [
+  { name: 'Cases', url: '/en/cases/', isCurrent: true },
+];
+
+const categories = [
+  { id: 'all', name: 'All' },
+  { id: 'acquisition', name: 'Lead Gen System' },
+  { id: 'ecommerce', name: 'E-commerce' },
+  { id: 'multilingual', name: 'Multilingual' },
+];
+
+const cases = [
+  {
+    id: 1,
+    title: 'Huarui Machinery Lead Gen System',
+    category: 'acquisition',
+    categoryName: 'Lead Gen System',
+    description: 'Complete lead generation system for industrial machinery manufacturer, enabling multi-channel inquiry capture and automated follow-up.',
+    image: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80',
+    results: [
+      { label: 'Monthly Inquiries', value: '120+', before: '30' },
+      { label: 'Inquiry Quality', value: '85%', before: '45%' },
+    ],
+    metrics: [
+      { label: 'Website Visitors', value: '+180%' },
+      { label: 'Page Dwell Time', value: '+2.5min' },
+      { label: 'Conversion Rate', value: '+320%' },
+    ],
+    tags: ['Lead Gen System', 'B2B', 'Machinery'],
+    testimonial: 'InquiryCloud transformed our independent website into a real lead generation engine. Within 3 months, inquiries quadrupled with high quality.',
+    client: 'Mr. Zhang',
+  },
+  {
+    id: 2,
+    title: 'Yuexiang Home E-commerce Lead Gen',
+    category: 'ecommerce',
+    categoryName: 'E-commerce',
+    description: 'Custom e-commerce lead generation website with high-conversion product pages and cart recovery mechanisms for sales growth.',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+    results: [
+      { label: 'Monthly Sales', value: '$180K', before: '$60K' },
+      { label: 'Conversion Rate', value: '4.2%', before: '1.8%' },
+    ],
+    metrics: [
+      { label: 'Average Order Value', value: '+35%' },
+      { label: 'Repeat Purchase Rate', value: '+48%' },
+      { label: 'Cart Recovery', value: '23%' },
+    ],
+    tags: ['E-commerce', 'Home', 'B2C'],
+    testimonial: 'Before, our website was just a showcase. Now every page generates inquiries. Most surprisingly, SEO traffic continues to grow.',
+    client: 'Manager Li',
+  },
+  {
+    id: 3,
+    title: 'Zhiyun Tech Multilingual Lead Gen',
+    category: 'multilingual',
+    categoryName: 'Multilingual',
+    description: '5-language unified management system, helping expand into European and Southeast Asian markets.',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+    results: [
+      { label: 'Markets Covered', value: '5 Countries', before: '1 Country' },
+      { label: 'Overseas Inquiries', value: '60%', before: '10%' },
+    ],
+    metrics: [
+      { label: 'German Traffic', value: '+450%' },
+      { label: 'SEA Inquiries', value: '+280%' },
+      { label: 'Multilingual SEO', value: 'Top 10' },
+    ],
+    tags: ['Multilingual', 'SaaS', 'Global'],
+    testimonial: 'The multilingual versions helped us open the European market. Managing all sites with one system has greatly improved efficiency.',
+    client: 'Director Wang',
+  },
+  {
+    id: 4,
+    title: 'Luye Agriculture Content Marketing',
+    category: 'acquisition',
+    categoryName: 'Lead Gen System',
+    description: 'Through content marketing strategy, continuously publishing industry articles to achieve stable SEO traffic growth.',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80',
+    results: [
+      { label: 'Organic Traffic', value: '+400%', before: 'Baseline' },
+      { label: 'Content Page Inquiries', value: '35%', before: '5%' },
+    ],
+    metrics: [
+      { label: 'Articles Indexed', value: '200+' },
+      { label: 'Keyword Rankings', value: '150+' },
+      { label: 'Monthly New Traffic', value: '+15%' },
+    ],
+    tags: ['Content Marketing', 'SEO', 'Agriculture'],
+    testimonial: 'Through continuous content output, our organic traffic grew 4x, and they are all precise customers.',
+    client: 'Mr. Chen',
+  },
+  {
+    id: 5,
+    title: 'Boyuan Consulting Brand Lead Gen',
+    category: 'acquisition',
+    categoryName: 'Lead Gen System',
+    description: 'Management consulting company brand website, fully displaying professional capabilities and building customer trust.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    results: [
+      { label: 'Consultation Bookings', value: '80+/month', before: '15/month' },
+      { label: 'Close Rate', value: '28%', before: '12%' },
+    ],
+    metrics: [
+      { label: 'Brand Searches', value: '+220%' },
+      { label: 'Case Page Conversion', value: '8.5%' },
+      { label: 'Customer Trust', value: '+65%' },
+    ],
+    tags: ['Brand Website', 'Consulting', 'B2B'],
+    testimonial: 'The professional website image makes us stand out from competitors. Clients say they feel confident just looking at our website.',
+    client: 'Director Liu',
+  },
+  {
+    id: 6,
+    title: 'Sports Brand Global Lead Gen',
+    category: 'multilingual',
+    categoryName: 'Multilingual',
+    description: '8-language e-commerce system covering major global markets with unified backend management.',
+    image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&q=80',
+    results: [
+      { label: 'Global Markets', value: '8 Countries', before: '2 Countries' },
+      { label: 'Overseas Sales', value: '45%', before: '15%' },
+    ],
+    metrics: [
+      { label: 'Multilingual Orders', value: '+380%' },
+      { label: 'Global Visitors', value: '+520%' },
+      { label: 'Localized Conversion', value: '6.2%' },
+    ],
+    tags: ['Multilingual', 'E-commerce', 'Global'],
+    testimonial: 'One system manages 8 language versions, each market can operate locally. This is our most important infrastructure for globalization.',
+    client: 'Mr. Zhao',
+  },
+];
+
+const stats = [
+  { value: '200+', label: 'Lead Gen Systems', desc: 'Enterprise Solutions' },
+  { value: '3-5x', label: 'Avg Inquiry Growth', desc: 'Real Client Data' },
+  { value: '98%', label: 'Client Satisfaction', desc: 'Ongoing Partnerships' },
+  { value: '50+', label: 'Countries Covered', desc: 'Global Market Service' },
+];
+
+const methodology = [
+  {
+    step: '01',
+    title: 'Lead Gen Diagnosis',
+    desc: 'Analyze existing acquisition channels and identify growth opportunities',
+  },
+  {
+    step: '02',
+    title: 'System Design',
+    desc: 'Design conversion paths based on business scenarios',
+  },
+  {
+    step: '03',
+    title: 'Development & Deployment',
+    desc: 'High-conversion website system development and launch',
+  },
+  {
+    step: '04',
+    title: 'Continuous Optimization',
+    desc: 'Data-driven continuous improvement of acquisition results',
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SEO slot="head" seoTitle={pageTitle} seoDescription={pageDescription} ogType="website" />
+  <Schema
+    slot="head"
+    schema={{
+      type: 'CollectionPage',
+      name: 'InquiryCloud Client Results',
+      description: pageDescription,
+    }}
+  />
+
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Client Results</span>
+        <h1 class="text-4xl md:text-5xl font-light text-stone-800 mb-6">
+          Real Client Results
+          <span class="text-teal-700">Data Speaks</span>
+        </h1>
+        <p class="text-lg text-stone-500 leading-relaxed">
+          From 3-5x inquiry growth to global market expansion, these are the real results our clients have achieved
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Stats Section -->
+  <Section class="bg-white">
+    <Container>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-light text-teal-700 mb-2">{stat.value}</div>
+            <div class="text-base font-medium text-stone-700 mb-1">{stat.label}</div>
+            <div class="text-sm text-stone-400">{stat.desc}</div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Category Filter -->
+  <Section class="bg-stone-50">
+    <Container>
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        {categories.map((cat) => (
+          <button
+            type="button"
+            class="px-5 py-2 text-sm rounded border border-stone-200 bg-white text-stone-600 hover:border-teal-300 hover:text-teal-700 transition-colors"
+            data-category={cat.id}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
+      <!-- Cases Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {cases.map((caseItem) => (
+          <article class="group bg-white rounded border border-stone-100 overflow-hidden hover:shadow-lg transition-shadow" data-category={caseItem.category}>
+            <div class="aspect-[4/3] overflow-hidden">
+              <SmartImage
+                src={caseItem.image}
+                alt={caseItem.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                aspectRatio="4/3"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs text-teal-600 bg-teal-50 px-2 py-1 rounded">{caseItem.categoryName}</span>
+              </div>
+              <h3 class="text-xl font-medium text-stone-800 mb-2">{caseItem.title}</h3>
+              <p class="text-stone-500 text-sm leading-relaxed mb-4">{caseItem.description}</p>
+              
+              <!-- Results -->
+              <div class="grid grid-cols-2 gap-4 mb-4 p-4 bg-stone-50 rounded">
+                {caseItem.results.map((result) => (
+                  <div>
+                    <div class="text-xs text-stone-400 mb-1">{result.label}</div>
+                    <div class="flex items-baseline gap-2">
+                      <span class="text-lg font-medium text-teal-700">{result.value}</span>
+                      <span class="text-xs text-stone-400 line-through">{result.before}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <!-- Metrics -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                {caseItem.metrics.map((metric) => (
+                  <span class="text-xs text-stone-500 bg-stone-100 px-2 py-1 rounded">
+                    {metric.label}: <span class="text-teal-600 font-medium">{metric.value}</span>
+                  </span>
+                ))}
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                {caseItem.tags.map((tag) => (
+                  <span class="text-xs text-stone-400">#{tag}</span>
+                ))}
+              </div>
+
+              <!-- Testimonial -->
+              <blockquote class="border-l-2 border-teal-300 pl-4 py-2 bg-stone-50">
+                <p class="text-sm text-stone-600 italic mb-2">"{caseItem.testimonial}"</p>
+                <footer class="text-xs text-stone-400">— {caseItem.client}</footer>
+              </blockquote>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Methodology Section -->
+  <Section class="bg-white">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block text-xs tracking-widest text-stone-400 uppercase mb-3">Our Methodology</span>
+        <h2 class="text-3xl font-light text-stone-800 mb-4">How We Deliver Results</h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-8">
+        {methodology.map((item) => (
+          <div class="text-center">
+            <div class="text-5xl font-extralight text-teal-200 mb-4">{item.step}</div>
+            <h3 class="text-lg font-medium text-stone-800 mb-2">{item.title}</h3>
+            <p class="text-stone-500 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- CTA Section -->
+  <Section class="bg-stone-900 text-stone-300">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto py-8">
+        <h2 class="text-3xl font-light text-stone-100 mb-4">
+          Want Similar Results?
+        </h2>
+        <p class="text-stone-400 mb-8">
+          Contact us for a free consultation and customized lead generation solution
+        </p>
+        <a
+          href="/en/contact/"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-stone-100 text-stone-800 font-medium rounded hover:bg-white transition-colors"
+        >
+          <span>Get Free Consultation</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </Container>
+  </Section>
+</Layout>
+
+<script>
+  const categoryButtons = document.querySelectorAll('[data-category]');
+  const caseCards = document.querySelectorAll('article[data-category]');
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category');
+      
+      categoryButtons.forEach((btn) => {
+        btn.classList.toggle('bg-teal-50', btn.getAttribute('data-category') === category);
+        btn.classList.toggle('text-teal-700', btn.getAttribute('data-category') === category);
+        btn.classList.toggle('border-teal-300', btn.getAttribute('data-category') === category);
+      });
+
+      caseCards.forEach((card) => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

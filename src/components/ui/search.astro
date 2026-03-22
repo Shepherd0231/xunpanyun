@@ -1,0 +1,273 @@
+---
+/**
+ * Pagefind Search Component
+ * 
+ * A lightweight, fast search UI powered by Pagefind.
+ * Pagefind is a static search library that indexes your built site.
+ * 
+ * Usage:
+ * 1. Build your site: npm run build
+ * 2. Run pagefind indexing: npx pagefind --site dist
+ * 3. Deploy with the _pagefind folder
+ */
+
+export interface Props {
+  placeholder?: string;
+  class?: string;
+}
+
+const { 
+  placeholder = 'Search products, services...',
+  class: className = '' 
+} = Astro.props;
+
+const searchId = 'pagefind-search-' + Math.random().toString(36).substr(2, 9);
+---
+
+<div class:list={['relative', className]}>
+  <!-- Search Trigger Button -->
+  <button
+    type="button"
+    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+    data-search-trigger
+    aria-label="Open search"
+  >
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.35-4.35"/>
+    </svg>
+    <span class="hidden sm:inline">{placeholder}</span>
+    <span class="hidden md:inline-flex items-center gap-1 px-1.5 py-0.5 text-xs text-gray-500 bg-white rounded border">
+      <kbd>⌘</kbd><kbd>K</kbd>
+    </span>
+  </button>
+
+  <!-- Search Modal -->
+  <div
+    class="fixed inset-0 z-50 hidden"
+    data-search-modal
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site search"
+  >
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" data-search-backdrop></div>
+    
+    <!-- Modal Content -->
+    <div class="absolute inset-x-4 top-[10vh] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-2xl">
+      <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+        <!-- Search Input -->
+        <div class="border-b border-gray-200">
+          <div class="flex items-center gap-3 px-4 py-3">
+            <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              type="text"
+              class="flex-1 text-lg outline-none placeholder:text-gray-400"
+              placeholder={placeholder}
+              data-search-input
+              autocomplete="off"
+            />
+            <button
+              type="button"
+              class="p-1 text-gray-400 hover:text-gray-600"
+              data-search-close
+              aria-label="Close search"
+            >
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Search Results -->
+        <div class="max-h-[60vh] overflow-y-auto" data-search-results>
+          <div class="p-8 text-center text-gray-500">
+            <p>Type to search...</p>
+          </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="flex items-center justify-between px-4 py-2 bg-gray-50 text-xs text-gray-500 border-t border-gray-200">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-white rounded border">↑</kbd>
+              <kbd class="px-1.5 py-0.5 bg-white rounded border">↓</kbd>
+              <span>to navigate</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-white rounded border">↵</kbd>
+              <span>to select</span>
+            </span>
+          </div>
+          <span>Powered by Pagefind</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Pagefind Search Integration
+  (async function() {
+    const trigger = document.querySelector('[data-search-trigger]');
+    const modal = document.querySelector('[data-search-modal]');
+    const backdrop = document.querySelector('[data-search-backdrop]');
+    const closeBtn = document.querySelector('[data-search-close]');
+    const input = document.querySelector('[data-search-input]') as HTMLInputElement;
+    const resultsContainer = document.querySelector('[data-search-results]');
+    
+    let pagefind: any = null;
+    let searchDebounce: ReturnType<typeof setTimeout>;
+    
+    // Load Pagefind dynamically
+    async function loadPagefind() {
+      if (pagefind) return pagefind;
+      
+      try {
+        // @ts-ignore - Pagefind is loaded from the built files
+        pagefind = await import('/_pagefind/pagefind.js');
+        await pagefind.init();
+        return pagefind;
+      } catch (error) {
+        console.warn('Pagefind not found. Run "npx pagefind --site dist" after building.');
+        return null;
+      }
+    }
+    
+    // Open modal
+    function openModal() {
+      modal?.classList.remove('hidden');
+      input?.focus();
+      loadPagefind();
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Close modal
+    function closeModal() {
+      modal?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    // Perform search
+    async function performSearch(query: string) {
+      if (!query.trim()) {
+        resultsContainer!.innerHTML = `
+          <div class="p-8 text-center text-gray-500">
+            <p>Type to search...</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const pf = await loadPagefind();
+      if (!pf) {
+        resultsContainer!.innerHTML = `
+          <div class="p-8 text-center text-gray-500">
+            <p>Search is not available. Please build the site first.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const search = await pf.search(query);
+      
+      if (search.results.length === 0) {
+        resultsContainer!.innerHTML = `
+          <div class="p-8 text-center text-gray-500">
+            <p>No results found for "${query}"</p>
+          </div>
+        `;
+        return;
+      }
+      
+      // Render results
+      const resultsHtml = await Promise.all(
+        search.results.slice(0, 10).map(async (result: any, index: number) => {
+          const data = await result.data();
+          return `
+            <a 
+              href="${data.url}" 
+              class="block px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+              data-result-index="${index}"
+            >
+              <div class="flex items-start gap-3">
+                <span class="text-sm text-gray-400 mt-0.5">${index + 1}</span>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-medium text-gray-900 truncate">${data.meta.title}</h3>
+                  <p class="text-sm text-gray-600 line-clamp-2">${data.excerpt}</p>
+                  <span class="text-xs text-gray-400">${data.url}</span>
+                </div>
+              </div>
+            </a>
+          `;
+        })
+      );
+      
+      resultsContainer!.innerHTML = resultsHtml.join('');
+    }
+    
+    // Event listeners
+    trigger?.addEventListener('click', openModal);
+    backdrop?.addEventListener('click', closeModal);
+    closeBtn?.addEventListener('click', closeModal);
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Cmd/Ctrl + K to open
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openModal();
+      }
+      // Escape to close
+      if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+    
+    // Search input with debounce
+    input?.addEventListener('input', (e) => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => {
+        performSearch((e.target as HTMLInputElement).value);
+      }, 150);
+    });
+    
+    // Keyboard navigation for results
+    let selectedIndex = -1;
+    
+    document.addEventListener('keydown', (e) => {
+      if (modal?.classList.contains('hidden')) return;
+      
+      const results = resultsContainer?.querySelectorAll('[data-result-index]');
+      if (!results?.length) return;
+      
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, results.length - 1);
+        updateSelection(results);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        updateSelection(results);
+      } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        e.preventDefault();
+        (results[selectedIndex] as HTMLElement).click();
+      }
+    });
+    
+    function updateSelection(results: NodeListOf<Element>) {
+      results.forEach((el, i) => {
+        if (i === selectedIndex) {
+          el.classList.add('bg-blue-50');
+          (el as HTMLElement).scrollIntoView({ block: 'nearest' });
+        } else {
+          el.classList.remove('bg-blue-50');
+        }
+      });
+    }
+  })();
+</script>

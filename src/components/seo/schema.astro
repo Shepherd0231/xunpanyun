@@ -1,0 +1,159 @@
+---
+export interface OrganizationSchema {
+  type: 'Organization';
+  name: string;
+  url?: string;
+  logo?: string;
+  description?: string;
+  sameAs?: string[];
+  contactPoint?: {
+    telephone?: string;
+    contactType?: string;
+    email?: string;
+  };
+}
+
+export interface ProductSchema {
+  type: 'Product';
+  name: string;
+  description?: string;
+  image?: string;
+  brand?: string;
+  sku?: string;
+  offers?: {
+    price?: string;
+    priceCurrency?: string;
+    availability?: string;
+    url?: string;
+  };
+}
+
+export interface ArticleSchema {
+  type: 'Article';
+  headline: string;
+  description?: string;
+  image?: string;
+  author?: {
+    name: string;
+    url?: string;
+  };
+  publisher?: {
+    name: string;
+    logo?: string;
+  };
+  datePublished?: string;
+  dateModified?: string;
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface BreadcrumbListSchema {
+  type: 'BreadcrumbList';
+  items: BreadcrumbItem[];
+}
+
+export type SchemaType = OrganizationSchema | ProductSchema | ArticleSchema | BreadcrumbListSchema;
+
+export interface Props {
+  schema: SchemaType | SchemaType[];
+}
+
+const { schema } = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://example.com';
+
+const buildOrganizationSchema = (data: OrganizationSchema) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: data.name,
+  url: data.url || siteUrl,
+  ...(data.logo && { logo: data.logo.startsWith('http') ? data.logo : `${siteUrl}${data.logo}` }),
+  ...(data.description && { description: data.description }),
+  ...(data.sameAs && { sameAs: data.sameAs }),
+  ...(data.contactPoint && {
+    contactPoint: {
+      '@type': 'ContactPoint',
+      ...data.contactPoint,
+    },
+  }),
+});
+
+const buildProductSchema = (data: ProductSchema) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: data.name,
+  ...(data.description && { description: data.description }),
+  ...(data.image && { image: data.image.startsWith('http') ? data.image : `${siteUrl}${data.image}` }),
+  ...(data.brand && { brand: { '@type': 'Brand', name: data.brand } }),
+  ...(data.sku && { sku: data.sku }),
+  ...(data.offers && {
+    offers: {
+      '@type': 'Offer',
+      ...data.offers,
+    },
+  }),
+});
+
+const buildArticleSchema = (data: ArticleSchema) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.headline,
+  ...(data.description && { description: data.description }),
+  ...(data.image && { image: data.image.startsWith('http') ? data.image : `${siteUrl}${data.image}` }),
+  ...(data.author && {
+    author: {
+      '@type': 'Person',
+      name: data.author.name,
+      ...(data.author.url && { url: data.author.url }),
+    },
+  }),
+  ...(data.publisher && {
+    publisher: {
+      '@type': 'Organization',
+      name: data.publisher.name,
+      ...(data.publisher.logo && {
+        logo: {
+          '@type': 'ImageObject',
+          url: data.publisher.logo.startsWith('http') ? data.publisher.logo : `${siteUrl}${data.publisher.logo}`,
+        },
+      }),
+    },
+  }),
+  ...(data.datePublished && { datePublished: data.datePublished }),
+  ...(data.dateModified && { dateModified: data.dateModified }),
+});
+
+const buildBreadcrumbListSchema = (data: BreadcrumbListSchema) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: data.items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`,
+  })),
+});
+
+const buildSchema = (data: SchemaType) => {
+  switch (data.type) {
+    case 'Organization':
+      return buildOrganizationSchema(data);
+    case 'Product':
+      return buildProductSchema(data);
+    case 'Article':
+      return buildArticleSchema(data);
+    case 'BreadcrumbList':
+      return buildBreadcrumbListSchema(data);
+    default:
+      return null;
+  }
+};
+
+const schemas = Array.isArray(schema) ? schema.map(buildSchema).filter(Boolean) : [buildSchema(schema)].filter(Boolean);
+const jsonLd = schemas.length === 1 ? schemas[0] : { '@context': 'https://schema.org', '@graph': schemas };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
